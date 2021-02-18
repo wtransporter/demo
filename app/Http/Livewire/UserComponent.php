@@ -43,7 +43,7 @@ class UserComponent extends Component
     {
         // $id = $user->id;
         $user->delete();
-        
+
         // $this->users = $this->users->except($id);
 
         session()->flash('message', 'User deleted.');

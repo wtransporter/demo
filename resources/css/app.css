@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .btn {
 	display: inline-block;
     line-height: 1.5;
@@ -23,6 +27,3 @@
     border-color:#1a4c97ec;
 }
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
