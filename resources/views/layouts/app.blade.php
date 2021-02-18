@@ -43,5 +43,10 @@
         @stack('modals')
 
         @livewireScripts
+    <script>
+        // Livewire.on('userDeleted',() => {
+        //     alert('A user was deleted');
+        // })
+    </script>
     </body>
 </html>
