@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -15,10 +15,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 
+Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
 Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');

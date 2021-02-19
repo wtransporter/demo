@@ -24,7 +24,8 @@ class PostFactory extends Factory
         return [
             'category_id' => 1,
             'title' => $this->faker->sentence(3),
-            'body' => $this->faker->paragraph(),
+            'body' => $this->faker->paragraph(10),
+            'description' => $this->faker->paragraph(1),
             'image' => 'potatoe.jpeg',
         ];
     }

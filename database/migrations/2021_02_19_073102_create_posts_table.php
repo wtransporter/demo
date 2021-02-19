@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title', 50);
             $table->mediumText('body');
+            $table->string('description');
             $table->string('image');
             $table->timestamps();
         });
