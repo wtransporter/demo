@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->mediumText('body');
             $table->string('description');
             $table->string('image');
+            $table->unsignedInteger('visits')->default(0);
             $table->timestamps();
         });
     }

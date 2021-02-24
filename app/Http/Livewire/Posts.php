@@ -14,17 +14,8 @@ class Posts extends Component
     public $perPage = 6;
     public $post;
     public $showPost = false;
-    public $description;
-    public $body;
-    public $title;
-    public $category_id;
 
-    protected $rules = [
-        'category_id' => 'required|exists:categories,id',
-        'title' => 'required',
-        'description' => 'required|min:10',
-        'body' => 'required|min:10',
-    ];
+    protected $listeners = ['show', 'deleted' => '$refresh'];
 
     public function render()
     {
@@ -37,20 +28,12 @@ class Posts extends Component
     public function show(Post $post)
     {
         $this->showPost = true;
+               
         $this->post = $post;
     }
 
     public function back()
     {
         $this->showPost = false;
-    }
-
-    public function save()
-    {
-        $attributes = $this->validate();
-        $attributes['image'] = 'potatoe.jpeg';
-        Post::create($attributes);
-
-        $this->reset();
     }
 }
