@@ -24,66 +24,74 @@
         <button class="btn bg-primary font-semibold hover:bg-blue-700 text-white focus:outline-none" wire:click="save">Submit</button>
     {{-- </form> --}}
 
-    <table class="min-w-full table-auto">
-        <thead class="justify-between">
-            <tr class="bg-gray-700">
-                <th class="px-16 py-2">
-                    <span class="text-gray-200">ID</span>
-                </th>
-                <th class="px-16 py-2">
-                    <span class="text-gray-200">Name</span>
-                </th>
-                <th class="px-16 py-2 text-left">
-                    <span class="text-gray-200">Email</span>
-                </th>
-                <th class="px-16 py-2 text-left">
-                    <span class="text-gray-200">Status</span>
-                </th>
-                <th class="px-16 py-2">
-                    <span class="text-gray-200">Action</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="bg-gray-200">
-            @if ($users->count())
-                @foreach ($users as $user)
-                <tr class="bg-white border-2 border-gray-300">
-                    <td class="px-16 py-2 text-left">
-                        <span class="font-semibold"> {{ $user->id }}</span>
-                    </td>
-                    <td class="px-16 py-2 text-center">
-                        <span class="font-semibold"> {{ $user->name }}</span>
-                    </td>
-                    <td class="px-16 py-2 text-left">
-                        <span>{{ $user->email }}</span>
-                    </td>
-                    <td class="px-16 py-2 text-left">
-                        <span class="px-2 inline-flex text-xs leading-5 
-                            font-semibold rounded-full 
-                            bg-green-300 text-green-800 tracking-wide">
-                            Active
-                        </span>
-                    </td>
-                    <td class="px-16 py-2 text-center flex space-x-1">
-                        <button class="inline-block bg-blue-600 px-3 text-sm text-white rounded border-2 border-blue-600
-                            hover:bg-white hover:text-blue-900">Edit</button>
+   <div class="flex flex-col">
+       <div class="overflow-x-auto">
+           <div class="py-2 align-middle inline-block min-w-full">
+                <div class="overflow-hidden">
+                    <table class="min-w-full">
+                        <thead class="justify-between">
+                            <tr class="bg-gray-700">
+                                <th class="px-16 py-2">
+                                    <span class="text-gray-200">ID</span>
+                                </th>
+                                <th class="px-16 py-2">
+                                    <span class="text-gray-200">Name</span>
+                                </th>
+                                <th class="px-16 py-2 text-left">
+                                    <span class="text-gray-200">Email</span>
+                                </th>
+                                <th class="px-16 py-2 text-left">
+                                    <span class="text-gray-200">Status</span>
+                                </th>
+                                <th class="px-16 py-2">
+                                    <span class="text-gray-200">Action</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-200">
+                            @if ($users->count())
+                                @foreach ($users as $user)
+                                <tr class="bg-white border-2 border-gray-300">
+                                    <td class="px-16 py-2 text-left">
+                                        <span class="font-semibold"> {{ $user->id }}</span>
+                                    </td>
+                                    <td class="px-16 py-2 text-center">
+                                        <span class="font-semibold"> {{ $user->name }}</span>
+                                    </td>
+                                    <td class="px-16 py-2 text-left">
+                                        <span>{{ $user->email }}</span>
+                                    </td>
+                                    <td class="px-16 py-2 text-left">
+                                        <span class="px-2 inline-flex text-xs leading-5 
+                                            font-semibold rounded-full 
+                                            bg-green-300 text-green-800 tracking-wide">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-16 py-2 text-center flex space-x-1">
+                                        <button class="inline-block bg-blue-600 px-3 text-sm text-white rounded border-2 border-blue-600
+                                            hover:bg-white hover:text-blue-900">Edit</button>
 
-                        @if ($confirmDelete !== $user->id)
-                            <button wire:click="confirmDelete({{ $user->id }})" class="inline-block bg-red-600 px-3 text-sm text-white focus:outline-none rounded border-2 border-red-600
-                            hover:bg-white hover:text-red-900">Delete</button>
-                        @else
-                            <button wire:click="delete({{ $user->id }})" class="inline-block bg-green-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-green-600
-                            hover:bg-white hover:text-green-900">Yes</button>
-                            <button wire:click="cancelDelete" class="inline-block bg-red-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-red-600
-                            hover:bg-white hover:text-red-900">No</button>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-                
-            @endif
-        </tbody>
-    </table>
+                                        @if ($confirmDelete !== $user->id)
+                                            <button wire:click="confirmDelete({{ $user->id }})" class="inline-block bg-red-600 px-3 text-sm text-white focus:outline-none rounded border-2 border-red-600
+                                            hover:bg-white hover:text-red-900">Delete</button>
+                                        @else
+                                            <button wire:click="delete({{ $user->id }})" class="inline-block bg-green-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-green-600
+                                            hover:bg-white hover:text-green-900">Yes</button>
+                                            <button wire:click="cancelDelete" class="inline-block bg-red-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-red-600
+                                            hover:bg-white hover:text-red-900">No</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+           </div>
+       </div>
+   </div>
+
     @if ($users->count())
         <div class="mt-5">
             {{ $users->onEachSide(2)->links() }}

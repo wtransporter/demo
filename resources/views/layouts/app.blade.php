@@ -20,9 +20,9 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans">
-        <x-jet-banner />
+        {{-- <x-jet-banner /> --}}
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen bg-gray-100">
             @auth
                 @livewire('navigation-menu')    
             @endauth
@@ -37,7 +37,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
 

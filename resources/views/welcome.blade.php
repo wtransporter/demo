@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-center items-center pt-8 sm:justify-start sm:pt-0">
-            <img class="h-12 w-auto text-gray-700 sm:h-16" src="images/logo.png" alt="Logo">
+            <a href="{{ route('post.index') }}">
+                <img class="h-12 w-auto text-gray-700 sm:h-16" src="images/logo.png" alt="Logo">
+            </a>
             <span class="ml-4 text-4xl font-semibold text-gray-800">Najbolji recepti</span>
         </div>
     </x-slot>
