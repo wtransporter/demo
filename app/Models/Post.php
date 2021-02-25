@@ -16,4 +16,26 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function imagePath()
+    {
+        $path = 'storage/images' . '/' . $this->id . '/' . $this->image;
+        
+        if (!file_exists($path)) {
+            return 'images/potatoe.jpeg';
+        } else {
+            return url($path);
+        }
+    }
+    
+    public function thumb()
+    {
+        $path = 'storage/images/thumbs' . '/' . $this->id . '/' . $this->image;
+
+        if (!file_exists($path)) {
+            return 'images/potatoe.jpeg';
+        } else {
+            return url($path);
+        }
+    }
 }

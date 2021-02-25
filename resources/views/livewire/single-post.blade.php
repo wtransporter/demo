@@ -3,7 +3,7 @@
     <div>
         <div class="flex items-center justify-center w-full">
             <a href="" wire:click.prevent="show({{ $singlePost->id }})" class="">
-                <img class="object-cover bg-center h-32 lg:h-64 w-full" src="{{ url('storage/images/thumbs'). '/'. $singlePost->id . '/' . $singlePost->image }}" alt="Image">
+                <img class="object-cover bg-center h-32 lg:h-64 w-full" src="{{ $singlePost->thumb() }}" alt="Image">
             </a>
         </div>
 

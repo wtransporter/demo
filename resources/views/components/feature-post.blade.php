@@ -1,6 +1,6 @@
 <div class="p-2 flex">
     <div class="flex items-center w-32">
-        <img class="object-cover bg-center w-32 h-full border rounded p-1" src="{{ url('storage/images') .'/'. $featuredPost->image }}" alt="Image">
+        <img class="object-cover bg-center w-32 h-full border rounded p-1" src="{{ $featuredPost->thumb() }}" alt="Image">
     </div>
 
     <div class="lg:ml-4 xl:ml-1">
