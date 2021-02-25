@@ -6,6 +6,9 @@ use App\Models\Post;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
 
 class CreatePost extends Component
 {
@@ -22,7 +25,7 @@ class CreatePost extends Component
         'title' => 'required',
         'description' => 'required|min:10',
         'body' => 'required|min:10',
-        'image' => 'image',
+        'image' => 'sometimes|image',
     ];
     
     protected $messages = [
@@ -46,14 +49,32 @@ class CreatePost extends Component
     public function save()
     {
         $attributes = $this->validate();
-        
-        if (!empty($this->image)) {
-            $this->image->store('public/images');
-            $attributes['image'] = $this->image->hashName();
+
+        $imageHashName = $this->image->hashName(); 
+
+        $attributes['image'] = $imageHashName;
+
+        $post = Post::create($attributes);
+
+        $this->image->store('public/images/'.$post->id);
+
+        if(!File::exists(storage_path('app/public/images/' . $post->id))) {
+            File::makeDirectory(storage_path('app/public/images/' . $post->id), 0777);
         }
 
-        Post::create($attributes);
+        if(!File::exists(storage_path('app/public/images/thumbs/' . $post->id))) {
+            File::makeDirectory(storage_path('app/public/images/thumbs/' . $post->id), 0777);
+        }
+        $manager = new ImageManager();
+        $image = $manager->make('storage/images/' . $post->id.'/'.$imageHashName)
+            ->resize(null, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+        $image->save('storage/images/thumbs/' . $post->id . '/' . $imageHashName);
 
         $this->reset();
+
+        $this->emitUp('saved');
     }
 }

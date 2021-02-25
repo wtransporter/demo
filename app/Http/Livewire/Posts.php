@@ -15,7 +15,7 @@ class Posts extends Component
     public $post;
     public $showPost = false;
 
-    protected $listeners = ['show', 'deleted' => '$refresh'];
+    protected $listeners = ['show', 'deleted' => '$refresh', 'saved' => '$refresh'];
 
     public function render()
     {

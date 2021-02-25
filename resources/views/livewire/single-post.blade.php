@@ -1,9 +1,9 @@
 <div class="bg-white
         border-r-2 border-b-2 border-gray-200 hover:border-red-600  block md:flex md:flex-col justify-between rounded">
     <div>
-        <div class="flex items-center w-full">
+        <div class="flex items-center justify-center w-full">
             <a href="" wire:click.prevent="show({{ $singlePost->id }})" class="">
-                <img class="object-cover bg-center h-32 lg:h-64 w-full" src="{{ url('storage/images'). '/'. $singlePost->image }}" alt="Image">
+                <img class="object-cover bg-center h-32 lg:h-64 w-full" src="{{ url('storage/images/thumbs'). '/'. $singlePost->id . '/' . $singlePost->image }}" alt="Image">
             </a>
         </div>
 
