@@ -42,6 +42,10 @@
             @enderror
         </div>
         <div class="mt-2">
+            <label class="block" for="image">Slika</label>
+            <input wire:model="image" type="file" name="image" id="image" />
+        </div>
+        <div class="mt-2">
             <button wire:click.prevent="save" class="btn bg-primary text-white hover:bg-blue-700 font-semibold">Snimi</button>
         </div>
     </form>

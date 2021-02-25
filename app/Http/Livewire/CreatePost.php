@@ -5,19 +5,24 @@ namespace App\Http\Livewire;
 use App\Models\Post;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
+    use WithFileUploads;
+
     public $description;
     public $body;
     public $title;
     public $category_id;
+    public $image;
 
     protected $rules = [
         'category_id' => 'required|exists:categories,id',
         'title' => 'required',
         'description' => 'required|min:10',
         'body' => 'required|min:10',
+        'image' => 'image',
     ];
     
     protected $messages = [
@@ -41,7 +46,12 @@ class CreatePost extends Component
     public function save()
     {
         $attributes = $this->validate();
-        $attributes['image'] = 'potatoe.jpeg';
+        
+        if (!empty($this->image)) {
+            $this->image->store('public/images');
+            $attributes['image'] = $this->image->hashName();
+        }
+
         Post::create($attributes);
 
         $this->reset();
