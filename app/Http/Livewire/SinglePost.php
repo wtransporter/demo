@@ -10,8 +10,6 @@ class SinglePost extends Component
 
     public function show()
     {
-        $this->singlePost->visits++;
-        $this->singlePost->save();
         $this->emitUp('show', $this->singlePost);
     }
 

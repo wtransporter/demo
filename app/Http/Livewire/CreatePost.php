@@ -19,6 +19,17 @@ class CreatePost extends Component
         'description' => 'required|min:10',
         'body' => 'required|min:10',
     ];
+    
+    protected $messages = [
+        'category_id.required' => 'Morate izabrati kategoriju.',
+        'title.required' => 'Polje naslov je obavezno.',
+        'description.required' => 'Polje opis je obavezno.',
+        'body.required' => 'Polje tekst je obavezno.',
+    ];
+
+    protected $validationAttributes = [
+        'body' => 'text'
+    ];
 
     public function render()
     {

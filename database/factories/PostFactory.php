@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(10),
             'description' => $this->faker->paragraph(1),
             'image' => 'potatoe.jpeg',
+            'visits' => rand(0, 10)
         ];
     }
 }

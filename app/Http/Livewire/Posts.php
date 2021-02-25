@@ -28,7 +28,8 @@ class Posts extends Component
     public function show(Post $post)
     {
         $this->showPost = true;
-               
+        $post->visits++;
+        $post->save();
         $this->post = $post;
     }
 
