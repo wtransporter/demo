@@ -11,7 +11,7 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public $perPage = 6;
+    public $perPage = 8;
     public $post;
     public $showPost = false;
 
@@ -20,8 +20,9 @@ class Posts extends Component
     public function render()
     {
         return view('livewire.posts', [
-            'posts' => Post::paginate($this->perPage),
-            'categories' => Category::all()
+            'posts' => Post::with(['category'])->paginate($this->perPage),
+            'categories' => Category::all(),
+            'popularPosts' => Post::with(['category'])->orderBy('visits', 'desc')->limit(5)->get(),
         ]);
     }
 

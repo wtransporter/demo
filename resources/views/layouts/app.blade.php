@@ -22,7 +22,7 @@
     <body class="font-sans">
         {{-- <x-jet-banner /> --}}
 
-        <div class="flex flex-col min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen bg-gray-200">
             @auth
                 @livewire('navigation-menu')    
             @endauth
