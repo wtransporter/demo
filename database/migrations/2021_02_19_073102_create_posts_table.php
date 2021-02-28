@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 50);
             $table->mediumText('body');
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->unsignedInteger('visits')->default(0);
             $table->timestamps();
         });

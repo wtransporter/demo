@@ -3,7 +3,7 @@
     <div class="min-w-full">
         <div class="p-4 float-left">
             <img class="h-56 w-full object-cover bg-center md:h-56 
-                md:w-auto md:float-left border rounded p-2 " src="{{ url('storage/images') .'/'. $post->id . '/' . $post->image }}" alt="Image">
+                md:w-auto md:float-left border rounded p-2 " src="{{ $post->imagePath() }}" alt="Image">
         </div>
         <div class="mx-4 md:mx-2">
             <h3 class="text-xl leading-7 text-black font-semibold">
