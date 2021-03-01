@@ -2,7 +2,7 @@
     <div class="flex flex-row md:flex-col">
         <div class="md:order-2">
             @if (!$showPost)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pb-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-2">
                     @foreach ($posts as $post)
                         <livewire:single-post :singlePost="$post" :key="$post->id"/>
                     @endforeach

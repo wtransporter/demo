@@ -1,9 +1,11 @@
 <div class="flex bg-white group group-link-underline cursor-pointer
-        border-r-2 border-b-2 border-gray-200 hover:border-red-600 rounded">
+        border-r-2 border-b-2 border-gray-100 hover:border-red-600 rounded-lg">
     <div class="flex">
         <a class="flex flex-col" href="#" wire:click.prevent="show({{ $singlePost->id }})">
-        <div class="flex items-center justify-center w-full">
-            <img class="object-cover bg-center h-32 lg:h-64 w-full" src="{{ $singlePost->thumb() }}" alt="Image">
+        <div class="flex items-center justify-center w-full p-2">
+            <div class="rounded-lg overflow-hidden">
+                <img class="object-cover bg-center h-32 lg:h-64 w-full transition ease-in-out duration-500 transform hover:scale-110" src="{{ $singlePost->thumb() }}" alt="Image">
+            </div>
         </div>
 
         <div class="w-full px-4 pt-2">

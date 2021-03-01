@@ -11,7 +11,7 @@
 
     <div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
-            <div class="relative flex items-top justify-center bg-gray-200 dark:bg-gray-900 sm:items-center sm:pt-0">
+            <div class="relative flex items-top justify-center dark:bg-gray-900 sm:items-center sm:pt-0">
                 @if (Route::has('login') && !Auth::check())
                     <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                         @auth

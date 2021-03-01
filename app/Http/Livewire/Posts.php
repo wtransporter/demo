@@ -11,7 +11,7 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public $perPage = 8;
+    public $perPage = 9;
     public $post;
     public $showPost = false;
 

@@ -23,7 +23,7 @@
     <body class="font-sans">
         {{-- <x-jet-banner /> --}}
 
-        <div class="flex flex-col min-h-screen bg-gray-200">
+        <div class="flex flex-col min-h-screen bg-gray-100">
             @auth
                 @livewire('navigation-menu')    
             @endauth
@@ -39,52 +39,16 @@
 
             <x-section-image />
 
+            <x-categories-card />
+
             <!-- Page Content -->
             <main class="flex-grow">
                 {{ $slot }}
             </main>
 
-            <x-section-image />
+            <x-newsletter />
 
-            <div class="flex bg-gray-900 pb-20">
-                <div class="px-5 grid grid-cols-10 container mx-auto max-w-7xl text-white">
-                    <div class="pt-20 px-4 text-sm col-span-4">
-                        <img class="mb-5 h-12" src="images/logo-light.png" alt="Logo">
-                        <p class="mb-5 leading-7">
-                            I provide new recipes with a twist on daily basis. I also post blog posts about fun ideas to do in the kitchen
-                        </p>
-                        <ul class="flex text-white" style="font-size: 18px">
-                            <li class="mr-4"><a class="flex items-center align-middle bg-gray-800 w-10 h-10 rounded-full hover:cursor-pointer" href="#"><i class="mx-auto fab fa-facebook-f"></i></a> </li>
-                            <li class="mr-4"><a class="flex items-center align-middle bg-gray-800 w-10 h-10 rounded-full hover:cursor-pointer" href="#"><i class="mx-auto fab fa-linkedin-in"></i></a> </li>
-                            <li class="mr-4"><a class="flex items-center align-middle bg-gray-800 w-10 h-10 rounded-full hover:cursor-pointer" href="#"><i class="mx-auto fab fa-twitter"></i></a> </li>
-                            <li class="mr-4"><a class="flex items-center align-middle bg-gray-800 w-10 h-10 rounded-full hover:cursor-pointer" href="#"><i class="mx-auto fab fa-twitter"></i></a> </li>
-                        </ul>
-                    </div>
-                    <div class="ml-24 pt-20 px-4 col-span-3 col-start-5">
-                        <h1 class="mb-6 text-xl font-semibold">Recepti</h1>
-                        <ul class="leading-8">
-                            <li>Breakfast</li>
-                            <li>Desserts</li>
-                            <li>Dinner</li>
-                            <li>Dairy</li>
-                        </ul>
-                    </div>
-                    <div class="ml-24 pt-20 px-4 col-span-3">
-                        <h1 class="mb-6 text-xl font-semibold">Politika privatnosti</h1>
-                        <ul class="leading-8">
-                            <li>Breakfast</li>
-                            <li>Desserts</li>
-                            <li>Dinner</li>
-                            <li>Dairy</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="py-6 bg-gray-900 border-t border-gray-800 text-white">
-                <div class="container mx-auto max-w-6xl text-center">
-                    © Recepti 2021. Built with Laravel, Tailwind CSS and Livewire.
-                </div>
-            </div>
+            <x-footer />
         </div>
 
         @stack('modals')
