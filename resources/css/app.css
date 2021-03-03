@@ -19,8 +19,21 @@
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+
+@variants group-hover, hover, focus {
+    .bg-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgba(26, 76, 151, var(--tw-bg-opacity));
+    }
+}
+
 .bg-primary {
-    background-color:#1a4c97ec;
+    --tw-bg-opacity: 1;
+    background-color: rgba(26, 76, 151, var(--tw-bg-opacity));
+}
+
+.text-primary {
+    color: #1a4c97ec;
 }
 
 .border-primary {

@@ -17,16 +17,5 @@
                 @include('posts.show')
             @endif
         </div>
-
-        <div class="hidden md:order-1 w-full p-2">
-            <div>
-                <h1 class="text-center font-bold text-2xl">Najpopularnije</h1>
-                <div  class="grid grid-cols-3">
-                    @foreach ($popularPosts as $featuredPost)
-                        <x-feature-post :featuredPost="$featuredPost"/>
-                    @endforeach
-                </div>
-            </div>
-        </div>
     </div>
 </div>

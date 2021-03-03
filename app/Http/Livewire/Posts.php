@@ -22,7 +22,7 @@ class Posts extends Component
         return view('livewire.posts', [
             'posts' => Post::with(['category'])->paginate($this->perPage),
             'categories' => Category::all(),
-            'popularPosts' => Post::with(['category'])->orderBy('visits', 'desc')->limit(5)->get(),
+            'randomPosts' => Post::inRandomOrder()->take(3)->get(),
         ]);
     }
 
