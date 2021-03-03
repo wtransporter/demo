@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Step;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function steps()
+    {
+        return $this->hasMany(Step::class);
     }
 
     public function imagePath()

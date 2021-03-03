@@ -21,6 +21,13 @@
         <div class="mt-2">
             <label class="block" for="body">Tekst</label>
             <textarea wire:model="body" class="w-full bg-gray-100" name="body" id="body" rows="6" placeholder="Tekst"></textarea>
+        </div>
+        <div class="mt-2">
+            <label class="block" for="body">Koraci</label>
+            @foreach ($postSteps as $index => $postStep)
+                <textarea wire:model="postSteps.{{$index}}.body" class="w-full bg-gray-100" name="postSteps[{{$index}}][body]" rows="6" placeholder="Tekst"></textarea>
+            @endforeach
+            <button wire:click.prevent="addStep" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-plus-circle mr-1"></i> Dodaj korak</button>
             @error('body')
                 <span class="text-red-700 block text-sm italic">
                     {{ $message }}
@@ -46,7 +53,7 @@
             <input wire:model="image" type="file" name="image" id="image" />
         </div>
         <div class="mt-2">
-            <button wire:click.prevent="save" class="btn bg-primary text-white hover:bg-blue-700 font-semibold">Snimi</button>
+            <button wire:click.prevent="save" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-save mr-1"></i> Snimi</button>
         </div>
     </form>
 </div>

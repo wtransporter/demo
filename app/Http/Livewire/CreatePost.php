@@ -19,12 +19,13 @@ class CreatePost extends Component
     public $title;
     public $category_id;
     public $image;
+    public $postSteps = [];
 
     protected $rules = [
         'category_id' => 'required|exists:categories,id',
         'title' => 'required',
         'description' => 'required|min:10',
-        'body' => 'required|min:10',
+        'body' => 'sometimes|required|min:10',
         'image' => 'sometimes|image',
     ];
     
@@ -38,6 +39,18 @@ class CreatePost extends Component
     protected $validationAttributes = [
         'body' => 'text'
     ];
+
+    public function mount()
+    {
+        $this->postSteps = [
+            ['body' => '', 'image' => '']
+        ];
+    }
+
+    public function addStep()
+    {
+        $this->postSteps[] = ['body' => '', 'image' => ''];
+    }
 
     public function render()
     {
@@ -56,6 +69,10 @@ class CreatePost extends Component
 
         $post = Post::create($attributes);
 
+        foreach ($this->postSteps as $step) {
+            $post->steps()->create($step);
+        }
+        
         $this->image->store('public/images/'.$post->id);
 
         if(!File::exists(storage_path('app/public/images/' . $post->id))) {
