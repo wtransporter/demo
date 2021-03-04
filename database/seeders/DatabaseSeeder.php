@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
+use App\Models\Step;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,10 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(100)->create();
         $this->call([
             CategorySeeder::class,
-            PostSeeder::class,
         ]);
+
+        \App\Models\User::factory(20)
+            ->has(
+                Post::factory(2)
+                ->has(Step::factory(4))
+            )
+            ->create();
     }
 }
