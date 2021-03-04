@@ -17,6 +17,10 @@ use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 
-Route::get('/', [PostController::class, 'index'])->name('post.index');
-Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+// Route::get('/', [PostController::class, 'index'])->name('post.index');
+// Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+// Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+
+Route::resource('posts', PostController::class)->only(['index', 'create', 'show']);
+
 Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');

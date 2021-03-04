@@ -1,13 +1,11 @@
 <div>
     <div>
         @if (session()->has('message'))
-            <div class="p-2 mb-2 max-w-lg rounded border border-green-600 bg-green-200 text-green-900">
-                {{ session('message') }}
-            </div>
+            <x-alert type="red" :message="session('message')" />
         @endif
     </div>
 
-    {{-- <form wire:submit.prevent="save" action="" method="post"> --}}
+
         <div class="flex flex-col max-w-lg">
             <label for="name">Username:</label>
             <input wire:model="name" class="rounded" type="text" name="name" id="name" placeholder="Username">
@@ -22,7 +20,7 @@
         </div>
         <button class="rounded p-2 mt-2 mb-2 focus:outline-none bg-blue-600 hover:bg-blue-500 text-white" wire:click="save">Submit</button>
         <button class="btn bg-primary font-semibold hover:bg-blue-700 text-white focus:outline-none" wire:click="save">Submit</button>
-    {{-- </form> --}}
+
 
    <div class="flex flex-col">
        <div class="overflow-x-auto">

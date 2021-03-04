@@ -62,6 +62,7 @@ class CreatePost extends Component
     public function save()
     {
         $attributes = $this->validate();
+        $attributes = array_merge($attributes, ['user_id' => Auth()->id()]);
 
         $imageHashName = $this->image->hashName(); 
 
@@ -91,7 +92,6 @@ class CreatePost extends Component
         $image->save('storage/images/thumbs/' . $post->id . '/' . $imageHashName);
 
         $this->reset();
-
-        $this->emitUp('saved');
+        session()->flash('message', 'Recept je uspešno dodat.');
     }
 }

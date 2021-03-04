@@ -1,4 +1,7 @@
 <div class="p-4 text-gray-600">
+    @if (session()->has('message'))
+        <x-alert :message="session('message')" />
+    @endif
     <form action="" class="mt-4">
         <div class="">
             <label class="block" for="title">Naslov</label>
@@ -53,7 +56,8 @@
             <input wire:model="image" type="file" name="image" id="image" />
         </div>
         <div class="mt-2">
-            <button wire:click.prevent="save" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-save mr-1"></i> Snimi</button>
+            <button x-data x-on:click="window.scrollTo(50, 50)"
+                wire:click.prevent="save" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-save mr-1"></i> Snimi</button>
         </div>
     </form>
 </div>

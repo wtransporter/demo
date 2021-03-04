@@ -38,4 +38,10 @@ class Posts extends Component
     {
         $this->showPost = false;
     }
+
+    public function gotoPage($page)
+    {
+        $this->setPage($page);
+        $this->emit('toTop');
+    }
 }

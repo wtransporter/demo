@@ -2,7 +2,7 @@
     <div class="flex bg-gray-900 pb-20">
         <div class="px-5 grid grid-cols-1 md:grid-cols-10 container mx-auto max-w-7xl text-gray-400">
             <div class="pt-20 px-4 text-sm md:col-span-4">
-                <img class="mb-5 h-12" src="images/logo-light.png" alt="Logo">
+                <img class="mb-5 h-12" src="{{ asset('images/logo-light.png') }}" alt="Logo">
                 <p class="mb-5 leading-7">
                     I provide new recipes with a twist on daily basis. I also post blog posts about fun ideas to do in the kitchen
                 </p>
@@ -43,6 +43,14 @@
                 </div>
             </div>
         </div>
+        <a class="fixed text-white text-2xl bottom-2 right-0 flex items-center justify-center
+            border-4 border-white rounded-full h-20 w-20 bg-primary font-bold text-center" href="#top" onclick="scrollToTop(); return false">
+            Vrh 
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M8 7l4-4m0 0l4 4m-4-4v18">
+                </path>
+            </svg>
+        </a>
     </div>
     <div class="py-6 bg-gray-900 border-t border-gray-800 text-gray-400">
         <div class="container mx-auto max-w-6xl text-center">
