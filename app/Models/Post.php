@@ -33,7 +33,7 @@ class Post extends Model
         $path = 'storage/images' . '/' . $this->id . '/' . $this->image;
         
         if (!file_exists($path)) {
-            return 'images/potatoe.jpeg';
+            return 'images/demo.jpg';
         } else {
             return url($path);
         }
@@ -44,7 +44,7 @@ class Post extends Model
         $path = 'storage/images/thumbs' . '/' . $this->id . '/' . $this->image;
 
         if (!file_exists($path)) {
-            return 'images/potatoe.jpeg';
+            return 'images/demo.jpg';
         } else {
             return url($path);
         }

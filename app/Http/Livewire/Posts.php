@@ -13,9 +13,8 @@ class Posts extends Component
 
     public $perPage = 9;
     public $post;
-    public $showPost = false;
 
-    protected $listeners = ['show', 'deleted' => '$refresh', 'saved' => '$refresh'];
+    protected $listeners = ['deleted' => '$refresh', 'saved' => '$refresh'];
 
     public function render()
     {
@@ -24,19 +23,6 @@ class Posts extends Component
             'categories' => Category::all(),
             'randomPosts' => Post::inRandomOrder()->take(3)->get(),
         ]);
-    }
-
-    public function show(Post $post)
-    {
-        $this->showPost = true;
-        $post->visits++;
-        $post->save();
-        $this->post = $post;
-    }
-
-    public function back()
-    {
-        $this->showPost = false;
     }
 
     public function gotoPage($page)

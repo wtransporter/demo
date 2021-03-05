@@ -130,14 +130,21 @@ module.exports = {
                     900: '#702459',
                 },
             },
+            height: {
+                100: '25rem',
+                112: '28rem',
+                128: '32rem',
+                140: '35rem',
+            }
         },
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
-            backgroundColor: ['active'],
+            backgroundColor: ['active', 'checked'],
             textColor: ['active'],
+            borderColor: ['checked'],
         },
     },
 

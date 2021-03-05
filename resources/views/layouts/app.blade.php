@@ -40,7 +40,7 @@
                             <a href="{{ route('posts.index') }}">
                                 <img class="h-12 w-auto text-gray-700 sm:h-16" src="{{ asset('images/logo.png') }}" alt="Logo">
                             </a>
-                            <span class="ml-4 text-4xl font-semibold text-gray-800">Najbolji recepti</span>
+                            <span class="ml-4 text-4xl font-semibold text-gray-800">{{ config('app.name', 'Laravel') }}</span>
                         </div>
                         @if (Route::has('login') && !Auth::check())
                             <div class="flex justify-end items-center px-6 py-4">

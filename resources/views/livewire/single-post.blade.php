@@ -1,7 +1,8 @@
 <div class="flex bg-white group group-link-underline cursor-pointer
         border-r-2 border-b-2 border-gray-100 hover:border-red-600 rounded-lg">
-    <div class="flex">
-        <a class="flex flex-col" href="#" wire:click.prevent="show({{ $singlePost->id }})">
+    <div class="relative flex">
+        <a class="flex flex-col" wire:click="show({{ $singlePost->id }})
+            href="{{ route('posts.show', $singlePost->id) }}" >
         <div class="flex items-center justify-center w-full p-2">
             <div class="rounded-lg overflow-hidden">
                 <img class="object-cover bg-center h-32 lg:h-64 w-full transition ease-in-out duration-500 transform hover:scale-110" src="{{ $singlePost->thumb() }}" alt="Image">
@@ -13,8 +14,10 @@
                 <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600">
                     {{ $singlePost->category->name }}
                 </span>
-                <div wire:loading wire:target="show({{ $singlePost->id }})">
-                    <x-loading class="ml-2" />
+                <div class="absolute top-0 bottom-0 left-0 right-0 bg-gray-700 bg-opacity-50 rounded-lg" wire:loading wire:target="show({{ $singlePost->id }})">
+                    <div class="relative flex items-center justify-center mx-auto h-full">
+                        <x-loading />
+                    </div>
                 </div>
                 <div>
                     <span class="text-gray-600 inline-flex items-center text-sm">

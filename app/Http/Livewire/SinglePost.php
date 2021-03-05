@@ -10,7 +10,9 @@ class SinglePost extends Component
 
     public function show()
     {
-        $this->emitUp('show', $this->singlePost);
+        $this->singlePost->visits++;
+        $this->singlePost->save();
+        return redirect()->route('posts.show', $this->singlePost);
     }
 
     public function delete()

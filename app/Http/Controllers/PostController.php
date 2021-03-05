@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // return view('posts.show', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**

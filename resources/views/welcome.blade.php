@@ -20,7 +20,7 @@
     </x-slot>
 
     <div>
-        <div id="posts" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+        <div id="posts">
             <div class="flex items-top justify-center dark:bg-gray-900 sm:items-center sm:pt-0">
                 <div class="max-w-7xl mx-auto px-4 lg:px-6 w-full">
                     <livewire:posts />
