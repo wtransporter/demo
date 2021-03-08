@@ -135,6 +135,12 @@ module.exports = {
                 112: '28rem',
                 128: '32rem',
                 140: '35rem',
+            },
+            maxHeight: {
+                100: '25rem',
+                112: '28rem',
+                128: '32rem',
+                140: '35rem',
             }
         },
     },

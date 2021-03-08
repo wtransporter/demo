@@ -16,4 +16,9 @@ class Step extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function imagePath()
+    {
+        return 'storage/images/thumbs/' . $this->post->id . '/' . $this->image;
+    }
 }

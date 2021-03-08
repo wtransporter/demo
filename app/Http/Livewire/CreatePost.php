@@ -62,36 +62,53 @@ class CreatePost extends Component
     public function save()
     {
         $attributes = $this->validate();
-        $attributes = array_merge($attributes, ['user_id' => Auth()->id()]);
+        
+        $imageHashName = $this->image->hashName();
 
-        $imageHashName = $this->image->hashName(); 
-
-        $attributes['image'] = $imageHashName;
+        $attributes = array_merge($attributes, [
+                'user_id' => Auth()->id(),
+                'image' => $imageHashName
+            ]);
 
         $post = Post::create($attributes);
 
+        $this->storeImage($post, $this->image, $imageHashName);
+ 
         foreach ($this->postSteps as $step) {
-            $post->steps()->create($step);
+            $stepAttributes = [];
+            $imageHashName = $step['image']->hashName();
+
+            $stepAttributes = array_merge($stepAttributes, [
+                'body' => $step['body'],
+                'image' => $imageHashName
+            ]);
+
+            $post->steps()->create($stepAttributes);
+
+            $this->storeImage($post, $step['image'], $imageHashName);
         }
         
-        $this->image->store('public/images/'.$post->id);
+        $this->reset();
+        session()->flash('message', 'Recept je uspešno dodat.');
+    }
 
-        if(!File::exists(storage_path('app/public/images/' . $post->id))) {
+    public function storeImage($post, $image, $imageHashName)
+    {
+        $image->store('public/images/' . $post->id);
+
+        if (!File::exists(storage_path('app/public/images/' . $post->id))) {
             File::makeDirectory(storage_path('app/public/images/' . $post->id), 0777);
         }
 
-        if(!File::exists(storage_path('app/public/images/thumbs/' . $post->id))) {
+        if (!File::exists(storage_path('app/public/images/thumbs/' . $post->id))) {
             File::makeDirectory(storage_path('app/public/images/thumbs/' . $post->id), 0777);
         }
         $manager = new ImageManager();
-        $image = $manager->make('storage/images/' . $post->id.'/'.$imageHashName)
+        $image = $manager->make('storage/images/' . $post->id . '/' . $imageHashName)
             ->resize(null, 300, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
         $image->save('storage/images/thumbs/' . $post->id . '/' . $imageHashName);
-
-        $this->reset();
-        session()->flash('message', 'Recept je uspešno dodat.');
     }
 }

@@ -28,14 +28,27 @@
         <div class="mt-2">
             <label class="block" for="body">Koraci</label>
             @foreach ($postSteps as $index => $postStep)
-                <textarea wire:model="postSteps.{{$index}}.body" class="w-full bg-gray-100" name="postSteps[{{$index}}][body]" rows="6" placeholder="Tekst"></textarea>
+                <div class="mt-2">
+                    <textarea wire:model="postSteps.{{$index}}.body" class="w-full bg-gray-100" name="postSteps[{{$index}}][body]" rows="6" placeholder="Tekst"></textarea>
+                    <div class="h-32 w-64 my-2">
+                        
+                        @if ($postSteps[$index]['image'])
+                            <img class="h-32 w-full p-2 border object-cover object-center " src="{{ $postSteps[$index]['image']->temporaryUrl() }}">
+                        @else
+                            <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
+                        @endif
+                    </div>
+                    <input wire:model="postSteps.{{$index}}.image" type="file" name="postSteps[{{$index}}][image]">
+                </div>
             @endforeach
-            <button wire:click.prevent="addStep" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-plus-circle mr-1"></i> Dodaj korak</button>
             @error('body')
                 <span class="text-red-700 block text-sm italic">
                     {{ $message }}
                 </span>
             @enderror
+        </div>
+        <div class="mt-2">
+            <button wire:click.prevent="addStep" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-plus-circle mr-1"></i> Dodaj korak</button>
         </div>
         <div class="mt-2">
             <label class="block" for="category_id">Kategorija</label>
@@ -52,8 +65,17 @@
             @enderror
         </div>
         <div class="mt-2">
-            <label class="block" for="image">Slika</label>
-            <input wire:model="image" type="file" name="image" id="image" />
+            <div class="h-32 w-64 my-2">
+                @if ($image)
+                    <img class="h-32 w-full p-2 border object-cover object-center " src="@if ($image) {{ $image->temporaryUrl() }} @endif">
+                @else
+                    <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
+                @endif
+            </div>
+            <div>
+                <label class="block" for="image">Slika</label>
+                <input wire:model="image" type="file" name="image" id="image" />
+            </div>
         </div>
         <div class="mt-2">
             <button x-data x-on:click="window.scrollTo(50, 50)"
