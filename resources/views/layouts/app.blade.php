@@ -33,7 +33,7 @@
                 @livewire('navigation-menu')    
             @endauth
 
-            <header class="bg-white shadow">
+            <header  id="top" class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row sm:justify-start md:justify-between">
                         <div class="flex justify-center md:justify-start items-center order-1 md:order-none">
