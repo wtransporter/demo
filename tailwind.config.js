@@ -129,6 +129,7 @@ module.exports = {
                     800: '#97266d',
                     900: '#702459',
                 },
+                primary: '#1a4c97ec',
             },
             height: {
                 100: '25rem',

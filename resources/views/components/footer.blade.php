@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <a class="fixed text-white text-2xl bottom-2 right-0 flex items-center justify-center
+        <a id="to-top" class="hidden fixed text-white text-2xl bottom-2 right-0 items-center justify-center
             border-4 border-white rounded-full h-20 w-20 bg-primary font-bold text-center" href="#top" onclick="scrollToTop(); return false">
             Vrh 
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

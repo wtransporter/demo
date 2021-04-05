@@ -1,10 +1,9 @@
 <div class="flex bg-white group group-link-underline cursor-pointer
         border-r-2 border-b-2 border-gray-100 hover:border-red-600 rounded-lg">
-    <div class="relative flex">
-        <a class="flex flex-col" wire:click="show({{ $singlePost->id }})
-            href="{{ route('posts.show', $singlePost->id) }}" >
+    <div class="relative flex w-full">
+        <div class="flex flex-col w-full" wire:click="show({{ $singlePost->id }})">
         <div class="flex items-center justify-center w-full p-2">
-            <div class="rounded-lg overflow-hidden">
+            <div class="rounded-lg overflow-hidden flex justify-center w-full">
                 <img class="object-cover bg-center h-32 lg:h-64 w-full transition ease-in-out duration-500 transform hover:scale-110" src="{{ $singlePost->thumb() }}" alt="Image">
             </div>
         </div>
@@ -48,6 +47,6 @@
                 {!! $singlePost->description !!}
             </div>
         </div>
-        </a>
+        </div>
     </div>
 </div>

@@ -87,5 +87,18 @@
         @livewireScripts
 
         @stack('scripts')
+        <script>
+            window.onscroll = function()
+            {
+                var top = document.getElementById('to-top');
+                if(pageYOffset >= 600) {
+                    top.classList.remove("hidden");
+                    top.classList.add("flex");
+                } else {
+                    top.classList.add("hidden");
+                    top.classList.remove("flex");
+                }
+            };
+        </script>
     </body>
 </html>

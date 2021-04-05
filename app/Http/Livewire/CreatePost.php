@@ -4,11 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
-use App\Models\Category;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
-use Illuminate\Support\Facades\Storage;
 
 class CreatePost extends Component
 {
@@ -20,13 +18,15 @@ class CreatePost extends Component
     public $category_id;
     public $image;
     public $postSteps = [];
+    public $post = null;
+    public bool $createing = true;
 
     protected $rules = [
         'category_id' => 'required|exists:categories,id',
         'title' => 'required',
         'description' => 'required|min:10',
         'body' => 'sometimes|required|min:10',
-        'image' => 'sometimes|image',
+        'image' => 'sometimes|required|image',
     ];
     
     protected $messages = [
@@ -46,7 +46,7 @@ class CreatePost extends Component
             ['body' => '', 'image' => '']
         ];
     }
-
+    
     public function addStep()
     {
         $this->postSteps[] = ['body' => '', 'image' => ''];
@@ -54,9 +54,29 @@ class CreatePost extends Component
 
     public function render()
     {
-        return view('livewire.create-post', [
-            'categories' => Category::all()
+        return view('livewire.create-post');
+    }
+
+    public function update($postId)
+    {
+        $post = Post::findOrFail($postId);
+
+        $attributes = $this->validate();
+
+        $imageHashName = $this->image->hashName();
+
+        $attributes = array_merge($attributes, [
+            'user_id' => Auth()->id(),
+            'image' => $imageHashName
         ]);
+
+        $post->update($attributes);
+    }
+
+    public function removeStep($index)
+    {
+        unset($this->postSteps[$index]);
+        $this->postSteps = array_values($this->postSteps);
     }
 
     public function save()
@@ -76,7 +96,8 @@ class CreatePost extends Component
  
         foreach ($this->postSteps as $step) {
             $stepAttributes = [];
-            $imageHashName = $step['image']->hashName();
+
+            $imageHashName = $step['image'] ? $step['image']->hashName() : '';
 
             $stepAttributes = array_merge($stepAttributes, [
                 'body' => $step['body'],
@@ -85,7 +106,9 @@ class CreatePost extends Component
 
             $post->steps()->create($stepAttributes);
 
-            $this->storeImage($post, $step['image'], $imageHashName);
+            if ($step['image']) {
+                $this->storeImage($post, $step['image'], $imageHashName);
+            }
         }
         
         $this->reset();

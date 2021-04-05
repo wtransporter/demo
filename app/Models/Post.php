@@ -30,23 +30,29 @@ class Post extends Model
 
     public function imagePath()
     {
-        $path = 'storage/images' . '/' . $this->id . '/' . $this->image;
-        
-        if (!file_exists($path)) {
-            return 'images/demo.jpg';
-        } else {
-            return url($path);
+        if (!file_exists($this->pathToImage())) {
+            return $this->demoImage();
         }
+
+        return url($this->pathToImage());
     }
     
     public function thumb()
-    {
-        $path = 'storage/images/thumbs' . '/' . $this->id . '/' . $this->image;
-
-        if (!file_exists($path)) {
-            return 'images/demo.jpg';
-        } else {
-            return url($path);
+    {        
+        if (!file_exists($this->pathToImage('thumbs/'))) {
+            return $this->demoImage();
         }
+
+        return url($this->pathToImage('thumbs/'));
+    }
+
+    public function pathToImage($thumb = '')
+    {
+        return 'storage/images/'. $thumb . $this->id . '/' . $this->image;
+    }
+
+    public function demoImage()
+    {
+        return asset('images/demo.jpg');
     }
 }

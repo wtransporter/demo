@@ -49,9 +49,9 @@
                                             Active
                                         </span>
                                     </td>
-                                    <td class="px-1 py-2 text-center">
-                                        <div class="flex items-center justify-center space-x-1">
-                                            <a href="{{ route('posts.edit', $post) }}" class="inline-block bg-blue-600 px-3 text-sm text-white rounded border-2 border-blue-600
+                                    <td class="px-1 py-2 text-center text-gray-600">
+                                        <div class="flex items-center justify-center ">
+                                            {{-- <a href="{{ route('posts.edit', $post) }}" class="inline-block bg-blue-600 px-3 text-sm text-white rounded border-2 border-blue-600
                                                 hover:bg-white hover:text-blue-900 cursor-pointer">Edit</a>
 
                                             @if ($confirmDelete !== $post->id)
@@ -62,6 +62,39 @@
                                                 hover:bg-white hover:text-green-900">Yes</button>
                                                 <button wire:click="cancelDelete" class="inline-block bg-red-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-red-600
                                                 hover:bg-white hover:text-red-900">No</button>
+                                            @endif --}}
+                                            <div class="w-4 mr-2 transform hover:text-green-700 hover:scale-110 cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="w-4 mr-2 transform hover:text-primary hover:scale-110 cursor-pointer">
+                                                <a href="{{ route('posts.edit', $post) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            @if ($confirmDelete !== $post->id)
+                                                <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
+                                                    <svg wire:click="confirmDelete({{ $post->id }})" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </div>
+                                            @else
+                                                <div class="w-4 mr-2 transform hover:text-green-600 hover:scale-110 cursor-pointer text-green-700">
+                                                    <svg wire:click="delete({{ $post->id }})" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer text-red-600">
+                                                    <svg wire:click="cancelDelete" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
                                             @endif
                                         </div>
                                     </td>
