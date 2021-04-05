@@ -21,10 +21,12 @@
             <div class="order-2 md:col-span-7">
                 @foreach ($post->steps as $step)
                     <div class="flex flex-col lg:flex-row items-center w-full py-4">
-                        <div class="px-4 mb-4 lg:mb-0 lg:px-0 h-40 w-full lg:w-3/12">
-                            <img class="h-40 w-full lg:w-auto object-cover object-center rounded-md" src="{{ asset($step->imagePath()) }}" alt="Image">
-                        </div>
-                        <p class="px-4 lg:w-9/12">
+                        @if($step->image !== '')
+                            <div class="px-4 mb-4 lg:mb-0 lg:px-0 h-40 w-full lg:w-3/12">
+                                <img class="h-40 w-full lg:w-auto object-cover object-center rounded-md" src="{{ asset($step->imagePath()) }}" alt="Image">
+                            </div>
+                        @endif
+                        <p class="px-4 @if($step->image !== '') ' lg:w-9/12 ' @else ' w-full' @endif">
                             <span class="flex items-center justify-center rounded-tl-md rounded-br-md h-8 w-8 bg-blue-400 text-gray-700 font-bold text-3xl float-left mr-2 mt-2">
                                 {{ $loop->iteration }}
                             </span>
@@ -37,58 +39,12 @@
                 <div class="border border-gray-300 rounded-lg shadow-sm p-4">
                     <h2 class="text-center text-xl font-bold text-gray-800">Sastojci</h2>
                     <div class="flex flex-col space-y-2">
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" name="" id="">
-                            <span class="ml-2">1 kg pilećih, otkošćenih, bataka sa karabatakom</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" name="" id="">
-                            <span class="ml-2">800 g krompira</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">2 kašike suvog biljnog začina</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">1 kašičica mlevenog bibera</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">3 kašičice aleve paprike</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">4 kašike prezli</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">1 kašika sitno rendanog parmezana</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">3 kašičice začina za piletinu</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">1 kašičica mlevenog bibera</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">2 kašičice senfa</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">1 kašičica belog luka u prahu</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">2 kašičice aleve paprike</span>
-                        </label>
-                        <label class="text-gray-700 flex items-center border-b pb-2">
-                            <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" value=""/>
-                            <span class="ml-2">50 ml ulja</span>
-                        </label>
+                        @foreach ($post->ingredients as $item)
+                            <label class="text-gray-700 flex items-center border-b pb-2">
+                                <input class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-600 focus:outline-none focus:ring focus:ring-white" type="checkbox" name="" id="">
+                                <span class="ml-2">{{ $item->description }}</span>
+                            </label>
+                        @endforeach
                     </div>
                 </div>
             </div>

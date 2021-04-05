@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Models\Step;
 use App\Models\Category;
+use App\Traits\HasImagePath;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasImagePath;
 
     protected $guarded = ['id'];
 
@@ -33,31 +34,8 @@ class Post extends Model
         return $this->hasMany(Ingredients::class);
     }
 
-    public function imagePath()
+    public function parentId()
     {
-        if (!file_exists($this->pathToImage())) {
-            return $this->demoImage();
-        }
-
-        return url($this->pathToImage());
-    }
-    
-    public function thumb()
-    {        
-        if (!file_exists($this->pathToImage('thumbs/'))) {
-            return $this->demoImage();
-        }
-
-        return url($this->pathToImage('thumbs/'));
-    }
-
-    public function pathToImage($thumb = '')
-    {
-        return 'storage/images/'. $thumb . $this->id . '/' . $this->image;
-    }
-
-    public function demoImage()
-    {
-        return asset('images/demo.jpg');
+        return $this->id;
     }
 }

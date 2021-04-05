@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Post;
+use App\Traits\HasImagePath;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Step extends Model
 {
-    use HasFactory;
+    use HasFactory, HasImagePath;
 
     protected $guarded = ['id'];
 
@@ -17,8 +18,16 @@ class Step extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function imagePath()
+    public function parentID()
     {
-        return 'storage/images/thumbs/' . $this->post->id . '/' . $this->image;
+        return $this->post->id;
     }
+
+    // public function imagePath()
+    // {
+    //     $file = 'storage/images/thumbs/' . $this->post->id . '/' . $this->image;
+    //     if (file_exists($file)) {
+    //         return $file;
+    //     }
+    // }
 }
