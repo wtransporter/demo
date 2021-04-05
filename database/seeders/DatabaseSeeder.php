@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ingredients;
 use App\Models\Post;
 use App\Models\Step;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Post::factory(2)
                 ->has(Step::factory(4))
+                ->has(Ingredients::factory(5))
             )
             ->create();
     }

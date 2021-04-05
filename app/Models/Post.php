@@ -28,6 +28,11 @@ class Post extends Model
         return $this->hasMany(Step::class);
     }
 
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredients::class);
+    }
+
     public function imagePath()
     {
         if (!file_exists($this->pathToImage())) {
