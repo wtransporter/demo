@@ -33,6 +33,8 @@
                 @livewire('navigation-menu')    
             @endauth
 
+            {{-- @include('main-nav') --}}
+
             <header  id="top" class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row sm:justify-start md:justify-between">
@@ -41,6 +43,30 @@
                                 <img class="h-12 w-auto text-gray-700 sm:h-16" src="{{ asset('images/logo.png') }}" alt="Logo">
                             </a>
                             <span class="ml-4 text-4xl font-semibold text-gray-800">{{ config('app.name', 'Laravel') }}</span>
+                        </div>
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('post.index')">
+                                {{ __('Naslovna') }}
+                            </x-jet-nav-link>
+                            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                <x-jet-dropdown align="right" width="60">
+                                    <x-slot name="trigger">
+                                        <span class="inline-flex rounded-md">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                Recepti
+                                            </button>
+                                        </span>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                    @foreach ($categories as $category)
+                                        <x-jet-dropdown-link class="w-48 hover:border-b-2" href="{{ route('category.post.index', $category) }}">
+                                            {{ __($category->name) }}
+                                        </x-jet-dropdown-link>
+                                    @endforeach
+                                    </x-slot>
+                                </x-jet-dropdown>
+                            </div>
                         </div>
                         @if (Route::has('login') && !Auth::check())
                             <div class="flex justify-end items-center px-6 py-4">

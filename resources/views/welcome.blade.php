@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="showcase">
-        <x-section-image />
+        <x-section-image>
+            Ukusna hrana započinje ovde
+        </x-section-image>
 
         <x-categories-card />
         
@@ -8,7 +10,6 @@
             <div class="container mx-auto max-w-7xl px-0 sm:px-6 lg:px-8 py-20">
                 <h1 class="text-center font-bold text-3xl mb-10">Nasumičan izbor</h1>
                 <div  class="grid grid-cols-3 gap-3 px-4 lg:px-6">
-                    <?php $categories = \App\Models\Category::select('id')->get() ?>
                     @foreach ($categories as $category)
                         @foreach (\App\Models\Post::where('category_id', $category->id)->inRandomOrder()->take(1)->get() as $randomPost)
                             <livewire:single-post :singlePost="$randomPost" :key="$randomPost->id"/>

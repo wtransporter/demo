@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,6 @@ Route::get('/', [PostController::class, 'index'])->name('posts.index');
 // Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::resource('posts', PostController::class)->only(['create', 'show', 'edit']);
+Route::get('categories/{category:slug}/posts', [CategoryPostController::class, 'index'])->name('category.post.index');
 
 Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
