@@ -10,7 +10,8 @@ class PostsShow extends Component
 {
     use WithPagination;
     
-    public $confirmDelete;
+    public $modelId;
+    public $confirmingItemDeletion;
     
     public function render()
     {
@@ -19,21 +20,24 @@ class PostsShow extends Component
         ]);
     }
 
-    public function delete($id)
+    public function delete()
     {
-        $post = Post::findOrFail($id);
+        $post = Post::findOrFail($this->modelId);
         $post->delete();
+        $this->confirmingItemDeletion = false;
+        $this->emit('toTop');
     }
 
     public function confirmDelete($id)
     {
-        $this->confirmDelete = $id;
+        $this->confirmingItemDeletion = true;
+        $this->modelId = $id;
     }
 
-    public function cancelDelete()
-    {
-        $this->reset('confirmDelete');
-    }
+    // public function cancelDelete()
+    // {
+    //     $this->reset('confirmDelete');
+    // }
 
     public function gotoPage($page)
     {

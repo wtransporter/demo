@@ -14,7 +14,12 @@ class Posts extends Component
     public $perPage = 9;
     public $post;
 
-    protected $listeners = ['deleted' => '$refresh', 'saved' => '$refresh'];
+    protected $listeners = ['deleted' => 'refreshPage', 'saved' => '$refresh'];
+
+    public function refreshPage()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {

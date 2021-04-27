@@ -76,26 +76,11 @@
                                                     </svg>
                                                 </a>
                                             </div>
-                                            @if ($confirmDelete !== $post->id)
-                                                <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
-                                                    <svg wire:click="confirmDelete({{ $post->id }})" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </div>
-                                            @else
-                                                <div class="w-4 mr-2 transform hover:text-green-600 hover:scale-110 cursor-pointer text-green-700">
-                                                    <svg wire:click="delete({{ $post->id }})" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer text-red-600">
-                                                    <svg wire:click="cancelDelete" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                            @endif
+                                            <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
+                                                <svg wire:click="confirmDelete({{ $post->id }})" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -113,6 +98,27 @@
             {{ $posts->onEachSide(2)->links() }}
         </div>
     @endif
+
+    <!-- Delete User Confirmation Modal -->
+    <x-jet-dialog-modal wire:model="confirmingItemDeletion">
+        <x-slot name="title">
+            {{ __('Delete Item') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you want to delete this item?') }} 
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('confirmingItemDeletion')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
+                {{ __('Delete Item') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>
 
 @push('scripts')
