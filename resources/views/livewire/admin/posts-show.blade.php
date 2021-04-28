@@ -43,26 +43,16 @@
                                         <span>{{ $post->description }}</span>
                                     </td>
                                     <td class="px-5 py-2 text-left">
-                                        <span class="px-2 inline-flex text-xs leading-5 
-                                            font-semibold rounded-full 
-                                            bg-green-300 text-green-800 tracking-wide">
-                                            Active
-                                        </span>
+                                        <a href="#" wire:click.prevent="changeStatus({{ $post->id }})">
+                                            <span class="px-2 inline-flex text-xs leading-5 
+                                                font-semibold rounded-full 
+                                                {{ $post->status ? 'bg-green-300 text-green-800 hover:bg-green-400' : 'bg-red-300 text-red-900 hover:bg-red-400'}} tracking-wide">
+                                                {{ $post->status ? 'Active' : 'Inactive'}}
+                                            </span>
+                                        </a>
                                     </td>
                                     <td class="px-1 py-2 text-center text-gray-600">
                                         <div class="flex items-center justify-center ">
-                                            {{-- <a href="{{ route('posts.edit', $post) }}" class="inline-block bg-blue-600 px-3 text-sm text-white rounded border-2 border-blue-600
-                                                hover:bg-white hover:text-blue-900 cursor-pointer">Edit</a>
-
-                                            @if ($confirmDelete !== $post->id)
-                                                <button wire:click="confirmDelete({{ $post->id }})" class="inline-block bg-red-600 px-3 text-sm text-white focus:outline-none rounded border-2 border-red-600
-                                                hover:bg-white hover:text-red-900">Delete</button>
-                                            @else
-                                                <button wire:click="delete({{ $post->id }})" class="inline-block bg-green-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-green-600
-                                                hover:bg-white hover:text-green-900">Yes</button>
-                                                <button wire:click="cancelDelete" class="inline-block bg-red-600 px-1 text-sm text-white focus:outline-none rounded border-2 border-red-600
-                                                hover:bg-white hover:text-red-900">No</button>
-                                            @endif --}}
                                             <div class="w-4 mr-2 transform hover:text-green-700 hover:scale-110 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -100,7 +90,7 @@
     @endif
 
     <!-- Delete User Confirmation Modal -->
-    <x-jet-dialog-modal wire:model="confirmingItemDeletion">
+    <x-jet-confirmation-modal wire:model="confirmingItemDeletion" class="flex items-center">
         <x-slot name="title">
             {{ __('Delete Item') }}
         </x-slot>
@@ -118,7 +108,7 @@
                 {{ __('Delete Item') }}
             </x-jet-danger-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-jet-confirmation-modal>
 </div>
 
 @push('scripts')

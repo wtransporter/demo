@@ -12,6 +12,7 @@ class PostsShow extends Component
     
     public $modelId;
     public $confirmingItemDeletion;
+    public $active;
     
     public function render()
     {
@@ -34,10 +35,18 @@ class PostsShow extends Component
         $this->modelId = $id;
     }
 
-    // public function cancelDelete()
-    // {
-    //     $this->reset('confirmDelete');
-    // }
+    public function changeStatus($id)
+    {
+        $this->modelId = $id;
+        $this->toggleStatus();
+    }
+
+    public function toggleStatus()
+    {
+        $data = Post::find($this->modelId);
+        $data->status = !$data->status;
+        $data->save();
+    }
 
     public function gotoPage($page)
     {
