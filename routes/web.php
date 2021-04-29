@@ -22,7 +22,7 @@ Route::get('/', [PostController::class, 'index'])->name('posts.index');
 // Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
 // Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
 
-Route::resource('posts', PostController::class)->only(['create', 'show', 'edit']);
+Route::resource('posts', PostController::class)->only(['create', 'show', 'edit', 'update']);
 Route::get('categories/{category:slug}/posts', [CategoryPostController::class, 'index'])->name('category.post.index');
 
 Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');

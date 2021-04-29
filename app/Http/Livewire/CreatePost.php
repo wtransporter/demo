@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
+use App\Models\Step;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
@@ -12,6 +13,7 @@ class CreatePost extends Component
 {
     use WithFileUploads;
 
+    public $modelId;
     public $description;
     public $body;
     public $title;
@@ -26,7 +28,6 @@ class CreatePost extends Component
         'title' => 'required',
         'description' => 'required|min:10',
         'body' => 'sometimes|required|min:10',
-        'image' => 'sometimes|required|image',
     ];
     
     protected $messages = [
@@ -42,9 +43,14 @@ class CreatePost extends Component
 
     public function mount()
     {
-        $this->postSteps = [
-            ['body' => '', 'image' => '']
-        ];
+        if ($this->modelId) {
+            $this->loadModel();
+            $this->createing = false;
+        } else {
+            $this->postSteps = [
+                ['body' => '', 'image' => '']
+            ];
+        }
     }
     
     public function addStep()
@@ -57,33 +63,79 @@ class CreatePost extends Component
         return view('livewire.create-post');
     }
 
-    public function update($postId)
+    public function updateForm($id)
     {
-        $post = Post::findOrFail($postId);
+        $this->modelId = $id;
+    }
 
-        $attributes = $this->validate();
+    public function loadModel()
+    {
+        $data = Post::find($this->modelId);
 
-        $imageHashName = $this->image->hashName();
+        $this->category_id = $data->category_id;
+        $this->title = $data->title;
+        $this->description = $data->description;
+        $this->body = $data->body;
+        $this->image = $data->image;
 
-        $attributes = array_merge($attributes, [
+        foreach ($data->steps as $step) {
+            $this->postSteps[] = [
+                'id' => $step->id,
+                'post_id' => $this->modelId,
+                'body' => $step->body,
+                'image' => $step->image
+            ];
+        }
+    }
+
+    public function modelData()
+    {
+        return [
+            'category_id' => $this->category_id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'body' => $this->body,
+            'image' => $this->image
+        ];
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        $imageHashName = is_string($this->image) ? $this->image : $this->image->hashName();
+
+        $attributes = array_merge($this->modelData(), [
             'user_id' => Auth()->id(),
             'image' => $imageHashName
         ]);
 
+        $post = Post::find($this->modelId);
         $post->update($attributes);
+
+        if ($this->image !== $post->image) {
+            $this->storeImage($post, $this->image, $imageHashName);
+        }
+
+        foreach ($this->postSteps as $step) {
+            $post->steps()->where('id', $step['id'])->update($step);
+        }
+        session()->flash('message', 'Recept je uspešno azuriran.');
     }
 
     public function removeStep($index)
     {
+        $stepId = $this->postSteps[$index]['id'];
         unset($this->postSteps[$index]);
         $this->postSteps = array_values($this->postSteps);
+        Step::find($stepId)->delete();
     }
 
     public function save()
     {
         $attributes = $this->validate();
         
-        $imageHashName = $this->image->hashName();
+        $imageHashName = empty($this->image) ? '' : $this->image->hashName();
 
         $attributes = array_merge($attributes, [
                 'user_id' => Auth()->id(),
@@ -92,8 +144,18 @@ class CreatePost extends Component
 
         $post = Post::create($attributes);
 
-        $this->storeImage($post, $this->image, $imageHashName);
+        if (!empty($this->image)) {
+            $this->storeImage($post, $this->image, $imageHashName);
+        }
  
+        $this->createStep($post);
+        
+        $this->reset();
+        session()->flash('message', 'Recept je uspešno dodat.');
+    }
+
+    public function createStep($post)
+    {
         foreach ($this->postSteps as $step) {
             $stepAttributes = [];
 
@@ -110,9 +172,6 @@ class CreatePost extends Component
                 $this->storeImage($post, $step['image'], $imageHashName);
             }
         }
-        
-        $this->reset();
-        session()->flash('message', 'Recept je uspešno dodat.');
     }
 
     public function storeImage($post, $image, $imageHashName)

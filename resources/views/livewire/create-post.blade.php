@@ -32,6 +32,24 @@
             @enderror
         </div>
         <div class="mt-2">
+            <div class="h-32 w-64 my-2">
+                @if ($image)
+                    <img class="h-32 w-full p-2 border object-cover object-center " src="@if ($image && !is_string($image)) {{ $image->temporaryUrl() }} @else {{ asset('storage/images/thumbs/'.$modelId.'/'.$image) }} @endif">
+                @else
+                    <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
+                @endif
+            </div>
+            <div>
+                <label class="block" for="image">Slika</label>
+                <input wire:model="image" type="file" name="image" id="image" />
+                @error('image')
+                    <span class="text-red-700 block text-sm italic">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="mt-2">
             <label class="block" for="body">Koraci</label>
             @foreach ($postSteps as $index => $postStep)
                 <div class="mt-2">
@@ -67,24 +85,6 @@
                 </span>
             @enderror
         </div>
-        <div class="mt-2">
-            <div class="h-32 w-64 my-2">
-                @if ($image)
-                    <img class="h-32 w-full p-2 border object-cover object-center " src="@if ($image && !is_string($image)) {{ $image->temporaryUrl() }} @else {{ $post->thumb() }} @endif">
-                @else
-                    <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
-                @endif
-            </div>
-            <div>
-                <label class="block" for="image">Slika</label>
-                <input wire:model="image" type="file" name="image" id="image" />
-                @error('image')
-                    <span class="text-red-700 block text-sm italic">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-        </div>
         @if ($createing)
             <div class="mt-2">
                 <button x-data x-on:click="window.scrollTo(50, 50)"
@@ -93,7 +93,7 @@
         @else
             <div class="mt-2">
                 <button x-data x-on:click="window.scrollTo(50, 50)"
-                    wire:click.prevent="update({{$post->id}})" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-save mr-1"></i> Update</button>
+                    wire:click.prevent="update" class="btn bg-primary text-white hover:bg-blue-700 font-semibold"><i class="fa fa-save mr-1"></i> Update</button>
             </div>
         @endif
     </form>

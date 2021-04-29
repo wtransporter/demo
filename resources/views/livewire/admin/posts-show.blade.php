@@ -6,10 +6,21 @@
     </div>
 
    <div class="flex flex-col">
-       <div class="overflow-x-auto">
+        <div>
+            <div class="w-36 float-right flex justify-end">
+                <a href="{{ route('posts.create') }}">
+                <x-jet-secondary-button class="bg-green-700 hover:bg-green-500 active:bg-green-700">
+                    <span class="text-white hover:text-white">
+                        Create
+                    </span>
+                </x-jet-secondary-button>
+                </a>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
            <div class="py-2 align-middle inline-block min-w-full">
                 <div class="overflow-hidden">
-                    <table class=" table-auto">
+                    <table class=" table-auto w-full">
                         <thead class="justify-between">
                             <tr class="bg-gray-700">
                                 <th class="px-16 py-2">
@@ -60,7 +71,7 @@
                                                 </svg>
                                             </div>
                                             <div class="w-4 mr-2 transform hover:text-primary hover:scale-110 cursor-pointer">
-                                                <a href="{{ route('posts.edit', $post) }}">
+                                                <a href="{{ route('posts.edit', $post->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                     </svg>
