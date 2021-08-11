@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('post.create')">
                         {{ __('Novi recept') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
+                        {{ __('Manage Categories') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
