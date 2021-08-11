@@ -21,7 +21,7 @@
             <div class="order-2 md:col-span-7">
                 @foreach ($post->steps as $step)
                     <div class="flex flex-col lg:flex-row items-center w-full py-4">
-                        @if($step->image !== '')
+                        @if($step->image !== '' && !is_null($step->image))
                             <div class="px-4 mb-4 lg:mb-0 lg:px-0 h-40 w-full lg:w-3/12">
                                 <img class="h-40 w-full lg:w-auto object-cover object-center rounded-md" src="{{ asset($step->imagePath()) }}" alt="Image">
                             </div>

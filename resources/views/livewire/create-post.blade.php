@@ -55,10 +55,14 @@
                 <div class="mt-2">
                     <textarea wire:model="postSteps.{{$index}}.body" class="w-full bg-gray-100" name="postSteps[{{$index}}][body]" rows="6" placeholder="Tekst"></textarea>
                     <div class="h-32 w-64 my-2">
-                        @if (!empty($postSteps[$index]['image']))
-                            <img class="h-32 w-full p-2 border object-cover object-center" src="{{$postSteps[$index]['image']->temporaryUrl()}}">
-                        @else
+                        @if (empty($postSteps[$index]['image']))
                             <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
+                        @else
+                            @if (!is_string($postSteps[$index]['image']))
+                                <img class="h-32 w-full p-2 border object-cover object-center" src="{{$postSteps[$index]['image']->temporaryUrl()}}">
+                            @else
+                                <img class="h-32 w-full p-2 border object-cover object-center" src="{{ asset('storage/images/' . $modelId . '/' . $postSteps[$index]['image']) }}">
+                            @endif
                         @endif
                     </div>
                     <div class="flex">

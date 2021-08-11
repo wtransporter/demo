@@ -6,10 +6,9 @@
         </div>
         <div class="mt-4 flex flex-row items-center justify-center mx-auto space-x-2 max-w-4xl">
             <input class="rounded h-10 w-72" type="text" name="email" id="email" placeholder="Upišite vaš e-mail">
-            <button class="btn h-10 bg-blue-700 hover:bg-blue-600 before:scale-0 ease-in-out active:bg-blue-700 focus:outline-none focus:ring-2 text-white font-semibold">
+            <x-primary-button icon="paper-plane">
                 Submit
-                <i class="fas fa-paper-plane ml-1" style="font-size: 14px;"></i>
-            </button>
+            </x-primary-button>
         </div>
     </div>
 </div>

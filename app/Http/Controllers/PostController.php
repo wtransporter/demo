@@ -18,7 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('welcome', [
+            'featuredPosts' => Post::latest()->take(3)->get()
+        ]);
     }
 
     /**
