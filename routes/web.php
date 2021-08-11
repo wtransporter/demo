@@ -24,6 +24,7 @@ Route::resource('posts', PostController::class)->only(['create', 'show', 'edit',
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('categories/{category:slug}/posts', [CategoryPostController::class, 'index'])->name('category.post.index');
 
     Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
