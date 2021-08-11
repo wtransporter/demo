@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class SectionImage extends Component
 {
+    public $path;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($path)
     {
-        //
+        $this->path = $path;
     }
 
     /**

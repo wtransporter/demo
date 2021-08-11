@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="showcase">
-        <x-section-image>
+        <x-section-image path="images/showcase/doughnut.jpg">
             Ukusna hrana započinje ovde
         </x-section-image>
 
@@ -10,10 +10,7 @@
             <div class="container mx-auto max-w-7xl px-0 sm:px-6 lg:px-8 py-20">
                 <h1 class="text-center font-bold text-5xl mb-10 text-gray-800">Featured recipes</h1>
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 bg-white p-4 rounded-xl">
-                    <div class="flex-1 w-full">
-                        <img src="{{ asset('storage/images/' . $featuredPosts[0]->id . '/' . $featuredPosts[0]->image) }}"
-                            class="rounded-xl max-h-96 w-full object-cover" alt="{{ $featuredPosts[0]->title }}">
-                    </div>
+                    <x-post-image :post="$featuredPosts[0]" />
                     <div class="flex-1 flex flex-col">
                         <header>
                             <h3 class="text-4xl font-semibold text-gray-800">{{ $featuredPosts[0]->title }}</h3>
@@ -35,7 +32,9 @@
             </div>
         </div>
     </x-slot>
-
+    <x-section-image path="images/showcase/food.jpg">
+        Isprobajte najbolje recepte
+    </x-section-image>
     <div>
         <div id="posts">
             <div class="flex items-top justify-center dark:bg-gray-900 sm:items-center sm:pt-0">
