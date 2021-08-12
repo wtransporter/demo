@@ -71,4 +71,38 @@ class ManageCategoriesTest extends TestCase
         $this->get("categories/$category->slug/edit")
             ->assertRedirect('login');
     }
+
+    /** @test */
+    public function unauthenticated_user_may_not_update_category()
+    {
+        $category = Category::factory()->create(['name' => 'New name']);
+
+        $attributes = [
+            'name' => 'Upaded name',
+            'slug' => 'updated-name'
+        ];
+
+        $this->patch("categories/$category->slug", $attributes)
+            ->assertRedirect('login');
+    }
+
+        /** @test */
+    public function authenticated_user_may_update_category()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $category = Category::factory()->create(['name' => 'New name']);
+
+        $attributes = [
+            'name' => 'Upaded name',
+            'slug' => 'updated-name'
+        ];
+
+        $this->patch("categories/$category->slug", $attributes);
+
+        $this->assertDatabaseHas('categories', $attributes);
+
+        $this->get("categories/" . $category->fresh()->slug . "/edit")->assertOk();
+    }
 }

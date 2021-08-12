@@ -4,7 +4,9 @@
             @if (session()->has('message'))
                 <x-alert :message="session('message')" />
             @endif
-            <form action="" class="mt-4">
+            <form action="{{ route('categories.update', $category->slug) }}" class="mt-4" method="POST">
+                @csrf
+                @method('PATCH')
                 <div>
                     <label class="block" for="name">Naslov</label>
                     <input class="w-full bg-gray-100" type="text"

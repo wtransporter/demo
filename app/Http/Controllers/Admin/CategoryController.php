@@ -17,6 +17,20 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
+    public function update(Category $category)
+    {
+        $attributes = request()->validate([
+            'name' => ['required'],
+            'slug' => ['required']
+        ]);
+
+        $category->update($attributes);
+
+        cache()->forget('categories');
+
+        return redirect()->route('categories.edit', $category)->with('message', 'Category updated successfully.');
+    }
+
     public function destroy(Category $category)
     {
         $category->delete();
