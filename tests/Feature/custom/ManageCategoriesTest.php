@@ -105,4 +105,23 @@ class ManageCategoriesTest extends TestCase
 
         $this->get("categories/" . $category->fresh()->slug . "/edit")->assertOk();
     }
+
+    /** @test */
+    public function category_slug_must_be_unique()
+    {
+        $this->signIn();
+
+        $firstCategory = Category::factory()->create(['slug' => 'updated-name']);
+        $this->assertDatabaseHas('categories', ['slug' => $firstCategory->slug]);
+
+        $category = Category::factory()->create(['name' => 'New name']);
+
+        $attributes = [
+            'name' => 'Upaded name',
+            'slug' => 'updated-name'
+        ];
+
+        $this->patch("categories/$category->slug", $attributes)
+            ->assertSessionHasErrors('slug');
+    }
 }

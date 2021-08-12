@@ -23,7 +23,7 @@
                 </div>
                 <div class="mt-2">
                     <label class="block" for="slug">Slug</label>
-                    <input type="text" class="w-full bg-gray-100" name="slug" id="slug" placeholder="Slug" value="{{ old('name', $category->slug) }}"/>
+                    <input type="text" class="w-full bg-gray-100" name="slug" id="slug" placeholder="Slug" value="{{ old('slug', $category->slug) }}"/>
                     @error('slug')
                         <span class="text-red-700 block text-sm italic">
                             {{ $message }}

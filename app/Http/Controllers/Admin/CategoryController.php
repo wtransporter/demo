@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateCategoryFormRequest;
 
 class CategoryController extends Controller
 {
@@ -17,12 +18,9 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Category $category)
+    public function update(UpdateCategoryFormRequest $request, Category $category)
     {
-        $attributes = request()->validate([
-            'name' => ['required'],
-            'slug' => ['required']
-        ]);
+        $attributes = $request->validated();
 
         $category->update($attributes);
 
@@ -31,6 +29,12 @@ class CategoryController extends Controller
         return redirect()->route('categories.edit', $category)->with('message', 'Category updated successfully.');
     }
 
+    /**
+     * Delete given resource
+     *
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Category $category)
     {
         $category->delete();
