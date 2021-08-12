@@ -124,4 +124,45 @@ class ManageCategoriesTest extends TestCase
         $this->patch("categories/$category->slug", $attributes)
             ->assertSessionHasErrors('slug');
     }
+
+    /** @test */
+    public function authenticated_user_may_see_create_new_category_form()
+    {
+        $this->signIn();
+
+        $this->get('categories/create')->assertOk();
+    }
+
+    /** @test */
+    public function unauthenticated_user_may_not_see_create_new_category_form()
+    {
+        $this->get('categories/create')->assertRedirect('login');
+    }
+
+    /** @test */
+    public function authenticated_user_may_store_new_category()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $attributes = [
+            'name' => 'Category name',
+            'slug' => 'category-name'
+        ];
+
+        $this->post('categories', $attributes)->assertRedirect('categories/create');
+
+        $this->assertDatabaseHas('categories', $attributes);
+    }
+
+    /** @test */
+    public function unauthenticated_user_may_not_store_new_category()
+    {
+        $attributes = [
+            'name' => 'Category name',
+            'slug' => 'category-name'
+        ];
+
+        $this->post('categories', $attributes)->assertRedirect('login');
+    }
 }

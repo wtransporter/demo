@@ -18,6 +18,13 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
+    /**
+     * Update given category
+     *
+     * @param UpdateCategoryFormRequest $request
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateCategoryFormRequest $request, Category $category)
     {
         $attributes = $request->validated();
@@ -27,6 +34,28 @@ class CategoryController extends Controller
         cache()->forget('categories');
 
         return redirect()->route('categories.edit', $category)->with('message', 'Category updated successfully.');
+    }
+
+    public function create()
+    {
+        return view('admin.categories.create');
+    }
+
+    /**
+     * Store given category
+     *
+     * @param UpdateCategoryFormRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(UpdateCategoryFormRequest $request)
+    {
+        $attributes = $request->validated();
+
+        Category::create($attributes);
+
+        cache()->forget('categories');
+
+        return redirect()->route('categories.create')->with('message', 'Category added.');
     }
 
     /**
