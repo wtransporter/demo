@@ -12,6 +12,11 @@ class CategoryController extends Controller
         return view('admin.categories.index');
     }
 
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit', compact('category'));
+    }
+
     public function destroy(Category $category)
     {
         $category->delete();
