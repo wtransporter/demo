@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-admin>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Category:') . ' ' . $category->name }}
+        </h2>
+    </x-slot>
     <div class="max-w-5xl mx-auto p-4 lg:px-6 w-full text-gray-600">
         <div class="p-4 text-gray-600">
             @if (session()->has('message'))
@@ -36,4 +41,4 @@
             </form>
         </div>
     </div>
-</x-app-layout>
+</x-admin>
