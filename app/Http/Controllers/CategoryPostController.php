@@ -15,7 +15,7 @@ class CategoryPostController extends Controller
     public function index(Category $category)
     {
         return view('categories.index', [
-            'posts' => $category->posts()->paginate(9)
+            'posts' => $category->posts()->with('category')->paginate(9)
         ]);
     }
 }

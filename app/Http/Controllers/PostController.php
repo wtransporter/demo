@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         return view('welcome', [
-            'featuredPosts' => Post::latest()->take(3)->get()
+            'featuredPosts' => Post::with('category')->latest()->take(3)->get()
         ]);
     }
 

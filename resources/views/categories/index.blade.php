@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-section-image>        
+    <x-section-image path="images/showcase/doughnut.jpg">        
         {{ __($posts->first()->category->name) }}
     </x-section-image>
 

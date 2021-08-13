@@ -21,10 +21,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [UserControll
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::resource('posts', PostController::class)->only(['create', 'show', 'edit', 'update']);
+Route::get('categories/{category:slug}/posts', [CategoryPostController::class, 'index'])->name('category.post.index');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', CategoryController::class);
-    Route::get('categories/{category:slug}/posts', [CategoryPostController::class, 'index'])->name('category.post.index');
-
-    Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
