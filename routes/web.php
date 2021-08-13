@@ -26,5 +26,5 @@ Route::get('categories/{category:slug}/posts', [CategoryPostController::class, '
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', CategoryController::class);
-    Route::resource('posts.ingredients', IngredientController::class)->only(['index']);
+    Route::resource('posts.ingredients', IngredientController::class)->only(['index', 'update']);
 });
