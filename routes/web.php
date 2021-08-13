@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\IngredientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -25,4 +26,5 @@ Route::get('categories/{category:slug}/posts', [CategoryPostController::class, '
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', CategoryController::class);
+    Route::resource('posts.ingredients', IngredientController::class)->only(['index']);
 });

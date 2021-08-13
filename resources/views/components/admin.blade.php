@@ -43,11 +43,6 @@
                     </div>
                 </header>
             @endif
-            
-            <!-- Page showcase -->
-            @isset($showcase)
-                {{ $showcase }}
-            @endisset
 
             <!-- Page Content -->
             <main class="flex-grow">

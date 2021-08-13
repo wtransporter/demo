@@ -31,7 +31,7 @@ class Post extends Model
 
     public function ingredients()
     {
-        return $this->hasMany(Ingredients::class);
+        return $this->hasMany(Ingredient::class);
     }
 
     public function parentId()
