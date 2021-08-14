@@ -99,4 +99,21 @@ class ManageIngredientsTest extends TestCase
         $this->delete("posts/$postId/ingredients/$ingredient->id")
             ->assertRedirect('login');
     }
+
+    /** @test */
+    public function authenticated_user_may_create_ingredient()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $post = Post::factory()->create();
+
+        $attributes = [
+            'post_id' => $post->id,
+            'description' => 'Ingredient 1'
+        ];
+
+        $this->post("posts/$post->id/ingredients", $attributes)
+            ->assertRedirect("posts/$post->id/ingredients");
+    }
 }

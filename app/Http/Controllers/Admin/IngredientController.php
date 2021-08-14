@@ -12,7 +12,7 @@ class IngredientController extends Controller
     public function index(Post $post)
     {
         return view('admin.ingredients.index', [
-            'ingredients' => $post->ingredients->load('post')
+            'post' => $post->load('ingredients')
         ]);
     }
 
@@ -33,6 +33,17 @@ class IngredientController extends Controller
         $post->ingredients()->find(['id', $ingredient->id])->first()->update($attributes);
 
         return redirect()->route('posts.ingredients.index', $post)->with('message', 'Ingredient updated.');
+    }
+
+    public function store(Post $post, Request $request)
+    {
+        $attributes = $request->validate([
+            'description' => ['required']
+        ]);
+
+        $post->ingredients()->create($attributes);
+
+        return redirect()->route('posts.ingredients.index', $post)->with('message', 'Ingredient added.');
     }
 
     /**

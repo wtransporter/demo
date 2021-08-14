@@ -13,19 +13,20 @@
             @endif
         </div>
         <div class="flex flex-col">
-            <div>
-                <div class="w-36 float-right flex justify-end">
-                    <a href="{{ route('posts.create') }}">
-                    <x-jet-secondary-button class="bg-green-700 hover:bg-green-500 active:bg-green-700">
-                        <span class="text-white hover:text-white">
-                            {{ __('Create') }}
-                        </span>
-                    </x-jet-secondary-button>
-                    </a>
+            <div class="max-w-4xl flex items-center">
+                <div class="w-96">
+                    <label for="description" class="text-gray-600 font-semibold text-sm">Add ingredient:</label>
+                    <form action="{{ route('posts.ingredients.store', $post->id) }}" method="POST" class="w-full p-1">
+                        @csrf
+                        <input id="description" class="font-semibold px-2 py-1 w-full outline-none ring-2 ring-blue-400 ring-opacity-60 focus:ring-2 focus:ring-blue-400 rounded" 
+                            name="description" 
+                            value="{{ old('description') }}" />
+                    </form>
+                    <x-jet-input-error for="description" />
                 </div>
             </div>
             <div  class="w-full bg-white text-gray-600 text-sm px-4 rounded mt-4">
-                @foreach ($ingredients as $ingredient)
+                @foreach ($post->ingredients as $ingredient)
                 <div class="flex items-center">
                     <span class="w-8"># {{ $loop->iteration }}</span>
                     <form action="{{ route('posts.ingredients.update',[$ingredient->post->id, $ingredient->id]) }}" method="POST" class="w-full p-1">
