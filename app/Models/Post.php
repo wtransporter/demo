@@ -38,4 +38,9 @@ class Post extends Model
     {
         return $this->id;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(1);
+    }
 }

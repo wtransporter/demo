@@ -24,7 +24,7 @@ class Posts extends Component
     public function render()
     {
         return view('livewire.posts', [
-            'posts' => Post::with(['category'])->paginate($this->perPage),
+            'posts' => Post::with(['category'])->active()->paginate($this->perPage),
             'categories' => Category::all(),
             'randomPosts' => Post::inRandomOrder()->take(3)->get(),
         ]);
