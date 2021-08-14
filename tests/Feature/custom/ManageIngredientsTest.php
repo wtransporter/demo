@@ -57,4 +57,46 @@ class ManageIngredientsTest extends TestCase
         $response->assertRedirect("posts/$post->id/ingredients")->assertStatus(302);
     }
 
+    /** @test */
+    public function unauthenticated_users_may_not_update_ingredients()
+    {
+        $post = Post::factory()->create();
+        $ingredient1 = Ingredient::create([
+            'post_id' => $post->id,
+            'description' => 'Initial description'
+        ]);
+
+        $attributes = [
+            'post_id' => $post->id,
+            'description' => 'Updated'
+        ];
+
+        $response = $this->patch("posts/$post->id/ingredients/$ingredient1->id", $attributes);
+
+        $this->assertDatabaseMissing('ingredients', $attributes);
+
+        $response->assertRedirect('login');
+    }
+
+    /** @test */
+    public function authenticated_user_may_delete_ingredient()
+    {
+        $this->signIn();
+
+        $ingredient = Ingredient::factory()->create();
+        $postId = $ingredient->post_id;
+
+        $this->delete("posts/$postId/ingredients/$ingredient->id")
+            ->assertRedirect("posts/$postId/ingredients");
+    }
+
+    /** @test */
+    public function unauthenticated_user_may_not_delete_ingredient()
+    {
+        $ingredient = Ingredient::factory()->create();
+        $postId = $ingredient->post_id;
+
+        $this->delete("posts/$postId/ingredients/$ingredient->id")
+            ->assertRedirect('login');
+    }
 }

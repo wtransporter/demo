@@ -12,10 +12,18 @@ class IngredientController extends Controller
     public function index(Post $post)
     {
         return view('admin.ingredients.index', [
-            'ingredients' => $post->ingredients
+            'ingredients' => $post->ingredients->load('post')
         ]);
     }
 
+    /**
+     * Update given ingredient
+     *
+     * @param Request $request
+     * @param Post $post
+     * @param Ingredient $ingredient
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Post $post, Ingredient $ingredient)
     {
         $attributes = $request->validate([
@@ -26,4 +34,19 @@ class IngredientController extends Controller
 
         return redirect()->route('posts.ingredients.index', $post)->with('message', 'Ingredient updated.');
     }
+
+    /**
+    * Delete the given ingredient.
+    *
+    * @param Post $post
+    * @param Ingredient $ingredient
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    public function destroy(Post $post,Ingredient $ingredient)
+    {
+        $ingredient->delete();
+
+        return redirect()->route('posts.ingredients.index', $post)->with('message', 'Ingredient successfully deleted.');
+    }
+
 }

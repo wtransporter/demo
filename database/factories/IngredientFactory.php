@@ -3,17 +3,17 @@
 namespace Database\Factories;
 
 use App\Models\Post;
-use App\Models\Ingredients;
+use App\Models\Ingredient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class IngredientsFactory extends Factory
+class IngredientFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Ingredients::class;
+    protected $model = Ingredient::class;
 
     /**
      * Define the model's default state.
