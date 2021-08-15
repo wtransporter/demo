@@ -15,15 +15,62 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
-                        {{ __('Novi recept') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                        {{ __('Manage Categories') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('categories.create') }}" :active="request()->routeIs('categories.create')">
-                        {{ __('New Category') }}
-                    </x-jet-nav-link>
+                    <div class="flex items-center">
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{ __('Recipes') }}
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <!-- Recipes Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Recipes') }}
+                            </div>
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'bg-gray-200' : '' }}">
+                                {{ __('All Recipes') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('posts.create') }}" class="{{ request()->routeIs('posts.create') ? 'bg-gray-200' : '' }}">
+                                {{ __('New Recipe') }}
+                            </x-jet-dropdown-link>
+                        </x-slot>
+                    </x-jet-dropdown>
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{ __('Categoreis') }}
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <!-- Categories Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Categories') }}
+                            </div>
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('categories.index') }}" class="{{ request()->routeIs('categories.index') ? 'bg-gray-200' : '' }}">
+                                {{ __('All Categories') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('categories.create') }}" class="{{ request()->routeIs('categories.create') ? 'bg-gray-200' : '' }}">
+                                {{ __('New Category') }}
+                            </x-jet-dropdown-link>
+                        </x-slot>
+                    </x-jet-dropdown>
+                    </div>
                 </div>
             </div>
 
