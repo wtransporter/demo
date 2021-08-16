@@ -4,33 +4,41 @@ namespace App\Traits;
 
 trait HasImagePath
 {
-    abstract protected function parentId();
-
     public function imagePath()
     {
-        if (!file_exists($this->pathToImage())) {
+        if ($this->imageExists('app/public/images/')) {
             return $this->demoImage();
         }
 
-        return url($this->pathToImage());
+        return $this->pathToImage();
     }
 
     public function thumb()
     {
-        if (!file_exists($this->pathToImage('thumbs/'))) {
+        if ($this->imageExists('app/public/images/thumbs/')) {
             return $this->demoImage();
         }
 
-        return url($this->pathToImage('thumbs/'));
+        return $this->pathToThumb();
     }
 
-    public function pathToImage($thumb = '')
+    public function pathToThumb()
     {
-        return 'storage/images/' . $thumb . $this->parentId() . '/' . $this->image;
+        return asset('storage/images/thumbs/' . $this->image);
+    }
+
+    public function pathToImage()
+    {
+        return asset('storage/images/' . $this->image);
     }
 
     public function demoImage()
     {
         return asset('images/demo.jpg');
+    }
+
+    protected function imageExists($path)
+    {
+        return !file_exists(storage_path($path . $this->image)) || is_null($this->image);
     }
 }

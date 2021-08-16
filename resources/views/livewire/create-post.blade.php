@@ -34,7 +34,7 @@
         <div class="mt-2">
             <div class="h-32 w-64 my-2">
                 @if ($image)
-                    <img class="h-32 w-full p-2 border object-cover object-center " src="@if ($image && !is_string($image)) {{ $image->temporaryUrl() }} @else {{ asset('storage/images/thumbs/'.$modelId.'/'.$image) }} @endif">
+                    <img class="h-32 w-full p-2 border object-cover object-center " src="@if ($image && !is_string($image)) {{ $image->temporaryUrl() }} @else {{ asset('storage/images/thumbs/' . $image) }} @endif">
                 @else
                     <img class="h-32 w-full p-2 border object-cover object-center " src="{{ asset('images/no-image.png') }}">
                 @endif
@@ -61,12 +61,12 @@
                             @if (!is_string($postSteps[$index]['image']))
                                 <img class="h-32 w-full p-2 border object-cover object-center" src="{{$postSteps[$index]['image']->temporaryUrl()}}">
                             @else
-                                <img class="h-32 w-full p-2 border object-cover object-center" src="{{ asset('storage/images/' . $modelId . '/' . $postSteps[$index]['image']) }}">
+                                <img class="h-32 w-full p-2 border object-cover object-center" src="{{ asset('storage/images/thumbs/' . $postSteps[$index]['image']) }}">
                             @endif
                         @endif
                     </div>
                     <div class="flex">
-                        <input wire:model="postSteps.{{$index}}.image" type="file" name="postSteps[{{$index}}][image]">
+                        <input wire:model="postSteps.{{$index}}.image" type="file" name="postSteps[{{$index}}]]image]">
                         <button wire:click.prevent="removeStep({{$index}})" class="btn bg-red-700 text-white hover:bg-red-600 font-semibold ml-2">Obriši</button>
                     </div>
                 </div>

@@ -23,10 +23,10 @@
                     <div class="flex flex-col lg:flex-row items-center w-full py-4">
                         @if($step->image !== '' && !is_null($step->image))
                             <div class="px-4 mb-4 lg:mb-0 lg:px-0 h-40 w-full lg:w-3/12">
-                                <img class="h-40 w-full lg:w-auto object-cover object-center rounded-md" src="{{ asset($step->imagePath()) }}" alt="Image">
+                                <img class="h-40 w-full lg:w-auto object-cover object-center rounded-md" src="{{ $step->imagePath() }}" alt="Image">
                             </div>
                         @endif
-                        <p class="px-4 @if($step->image !== '') ' lg:w-9/12 ' @else ' w-full' @endif">
+                        <p class="px-4 {{ isset($step->image) ? ' lg:w-9/12 ' : ' w-full' }}">
                             <span class="flex items-center justify-center rounded-tl-md rounded-br-md h-8 w-8 bg-blue-400 text-gray-700 font-bold text-3xl float-left mr-2 mt-2">
                                 {{ $loop->iteration }}
                             </span>

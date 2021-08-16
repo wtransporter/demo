@@ -17,17 +17,4 @@ class Step extends Model
     {
         return $this->belongsTo(Post::class);
     }
-
-    public function parentID()
-    {
-        return $this->post->id;
-    }
-
-    // public function imagePath()
-    // {
-    //     $file = 'storage/images/thumbs/' . $this->post->id . '/' . $this->image;
-    //     if (file_exists($file)) {
-    //         return $file;
-    //     }
-    // }
 }

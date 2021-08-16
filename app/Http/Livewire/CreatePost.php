@@ -103,21 +103,30 @@ class CreatePost extends Component
     {
         $this->validate();
 
-        $imageHashName = is_string($this->image) ? $this->image : $this->image->hashName();
+        $post = Post::find($this->modelId);
+
+        if ($this->image !== $post->image) {
+            $imageHashName = is_string($this->image) ? $this->image : $this->image->hashName();
+            $path = $this->storeImage($post->id, $this->image, $imageHashName);
+        }
 
         $attributes = array_merge($this->modelData(), [
             'user_id' => Auth()->id(),
-            'image' => $imageHashName
+            'image' => $path ?? $post->image
         ]);
 
-        $post = Post::find($this->modelId);
         $post->update($attributes);
 
-        if ($this->image !== $post->image) {
-            $this->storeImage($post, $this->image, $imageHashName);
-        }
-
         foreach ($this->postSteps as $step) {
+            if (isset($step['image']) && !is_string($step['image'])) {
+                $imageHashName = is_string($step['image']) ? $step['image'] : $step['image']->hashName();
+                $image = $this->storeImage($step['id'], $step['image'], $imageHashName);
+
+                $step = array_merge($step, [
+                    'image' => $image
+                ]);
+            }
+
             $post->steps()->where('id', $step['id'])->update($step);
         }
         session()->flash('message', 'Recept je uspešno azuriran.');
@@ -174,23 +183,27 @@ class CreatePost extends Component
         }
     }
 
-    public function storeImage($post, $image, $imageHashName)
+    public function storeImage($modelId, $image, $imageHashName)
     {
-        $image->store('public/images/' . $post->id);
+        $path = $image->store('images/' . $modelId);
+        $path = str_replace('images/', '', $path);
 
-        if (!File::exists(storage_path('app/public/images/' . $post->id))) {
-            File::makeDirectory(storage_path('app/public/images/' . $post->id), 0777);
+        if (!File::exists(storage_path('app/public/images/' . $modelId))) {
+            File::makeDirectory(storage_path('app/public/images/' . $modelId), 0777);
         }
 
-        if (!File::exists(storage_path('app/public/images/thumbs/' . $post->id))) {
-            File::makeDirectory(storage_path('app/public/images/thumbs/' . $post->id), 0777);
+        if (!File::exists(storage_path('app/public/images/thumbs/' . $modelId))) {
+            File::makeDirectory(storage_path('app/public/images/thumbs/' . $modelId), 0777);
         }
+
         $manager = new ImageManager();
-        $image = $manager->make('storage/images/' . $post->id . '/' . $imageHashName)
+        $image = $manager->make('storage/images/' . $modelId . '/' . $imageHashName)
             ->resize(null, 300, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
-        $image->save('storage/images/thumbs/' . $post->id . '/' . $imageHashName);
+        $image->save('storage/images/thumbs/' . $modelId . '/' . $imageHashName);
+
+        return $path;
     }
 }

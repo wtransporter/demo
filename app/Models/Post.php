@@ -34,11 +34,6 @@ class Post extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-    public function parentId()
-    {
-        return $this->id;
-    }
-
     public function scopeActive($query)
     {
         return $query->whereStatus(1);
