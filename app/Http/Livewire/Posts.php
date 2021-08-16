@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
 use App\Models\Post;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -24,9 +23,7 @@ class Posts extends Component
     public function render()
     {
         return view('livewire.posts', [
-            'posts' => Post::with(['category'])->active()->paginate($this->perPage),
-            'categories' => Category::all(),
-            'randomPosts' => Post::inRandomOrder()->take(3)->get(),
+            'posts' => Post::with(['category'])->active()->paginate($this->perPage)
         ]);
     }
 

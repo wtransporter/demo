@@ -4,7 +4,7 @@
             Ukusna hrana započinje ovde
         </x-section-image>
 
-        <x-categories-card />
+        <x-categories-card :categories="$categories" />
         
         <div class="bg-section">
             @if (count($featuredPosts) > 0)

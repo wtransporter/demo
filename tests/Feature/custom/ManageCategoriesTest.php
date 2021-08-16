@@ -2,10 +2,11 @@
 
 namespace Tests\Feature\Custom;
 
-use App\Models\Category;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Icon;
+use App\Models\Category;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageCategoriesTest extends TestCase
 {
@@ -126,6 +127,38 @@ class ManageCategoriesTest extends TestCase
     }
 
     /** @test */
+    public function category_icon_is_required()
+    {
+        $this->signIn();
+
+        $icon = Icon::factory()->create();
+
+        $attributes = [
+            'name' => 'First category',
+            'slug' => 'first-category'
+        ];
+
+        $this->post("categories", $attributes)
+            ->assertSessionHasErrors('icon_id');
+    }
+
+    /** @test */
+    public function icon_must_exist_in_icons_table_when_assigning_to_a_category()
+    {
+        $this->signIn();
+        Icon::factory()->create(['id' => 1]);
+
+        $attributes = [
+            'name' => 'First category',
+            'slug' => 'first-category',
+            'icon_id' => 2
+        ];
+
+        $this->post("categories", $attributes)
+            ->assertSessionHasErrors('icon_id');
+    }
+
+    /** @test */
     public function authenticated_user_may_see_create_new_category_form()
     {
         $this->signIn();
@@ -145,12 +178,15 @@ class ManageCategoriesTest extends TestCase
         $this->withoutExceptionHandling();
         $this->signIn();
 
+        $icon = Icon::factory()->create();
+
         $attributes = [
             'name' => 'Category name',
-            'slug' => 'category-name'
+            'slug' => 'category-name',
+            'icon_id' => $icon->id
         ];
 
-        $this->post('categories', $attributes)->assertRedirect('categories/create');
+        $this->post('categories', $attributes)->assertRedirect(route('categories.create'));
 
         $this->assertDatabaseHas('categories', $attributes);
     }

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategorySeeder::class,
+            IconSeeder::class
         ]);
 
         \App\Models\User::factory(20)

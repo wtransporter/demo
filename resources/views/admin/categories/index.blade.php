@@ -16,7 +16,7 @@
             <div class="flex flex-col">
                 <div>
                     <div class="w-36 float-right flex justify-end">
-                        <a href="{{ route('posts.create') }}">
+                        <a href="{{ route('categories.create') }}">
                         <x-jet-secondary-button class="bg-green-700 hover:bg-green-500 active:bg-green-700">
                             <span class="text-white hover:text-white">
                                 {{ __('Create') }}

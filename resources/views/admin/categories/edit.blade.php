@@ -27,6 +27,22 @@
                     @enderror
                 </div>
                 <div class="mt-2">
+                    <label class="block" for="icon">Icon</label>
+                    <select name="icon_id" id="icon" style="font-family: 'FontAwesome', 'sans-serif';">
+                        <option value="0">Select Icon</option>                       
+                        @foreach (\App\Models\Icon::all() as $icon)
+                            <option value="{{ $icon->id }}" {{ $icon->id === $category->icon->id ? 'selected' : '' }}>
+                                {!! $icon->body !!}
+                            </option>
+                        @endforeach
+                        @error('icon_id')
+                            <span class="text-red-700 block text-sm italic">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </select>
+                </div>
+                <div class="mt-2">
                     <label class="block" for="slug">Slug</label>
                     <input type="text" class="w-full bg-gray-100" name="slug" id="slug" placeholder="Slug" value="{{ old('slug', $category->slug) }}"/>
                     @error('slug')

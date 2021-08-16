@@ -20,4 +20,9 @@ class Category extends Model
     {
         return 'slug';
     }
+
+    public function icon()
+    {
+        return $this->belongsTo(Icon::class);
+    }
 }

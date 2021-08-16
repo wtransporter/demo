@@ -26,6 +26,23 @@
                     @enderror
                 </div>
                 <div class="mt-2">
+                    <label class="block" for="icon">Icon</label>
+                    <select name="icon_id" id="icon" style="font-family: 'FontAwesome', 'sans-serif';">
+                        <option value="0">Select Icon</option>                       
+                        @foreach ($icons as $icon)
+                            <option value="{{ $icon->id }}">
+                                {!! $icon->body !!}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('icon_id')
+                        <span class="text-red-700 block text-sm italic">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                    {{-- <input type="text" class="w-full bg-gray-100" name="icon" id="icon" placeholder="Icon" value="{{ old('icon') }}"/> --}}
+                </div>
+                <div class="mt-2">
                     <label class="block" for="slug">Slug</label>
                     <input type="text" class="w-full bg-gray-100" name="slug" id="slug" placeholder="Slug" value="{{ old('slug') }}"/>
                     @error('slug')

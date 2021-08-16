@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        View::composer(['layouts.app', 'admin.categories.index', 'livewire.create-post'], function($view) {
+        View::composer(['layouts.app', 'admin.categories.index', 'livewire.create-post', 'welcome'], function($view) {
             $allCategories = \Cache::rememberForever('categories', function() {
                 return Category::all();
             });

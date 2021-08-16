@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Icon;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCategoryFormRequest;
@@ -15,7 +16,9 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.categories.edit', [
+            'category' => $category->load('icon')
+        ]);
     }
 
     /**
@@ -38,7 +41,9 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.categories.create', [
+            'icons' => Icon::all()
+        ]);
     }
 
     /**
