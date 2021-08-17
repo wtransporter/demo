@@ -40,6 +40,9 @@
                                         <th class="px-16 py-2 text-left">
                                             <span class="text-gray-200">Slug</span>
                                         </th>
+                                        <th class="px-16 py-2 text-left">
+                                            <span class="text-gray-200">Icon</span>
+                                        </th>
                                         <th class="px-16 py-2">
                                             <span class="text-gray-200">Action</span>
                                         </th>
@@ -58,14 +61,11 @@
                                             <td class="px-16 py-2 text-left">
                                                 <span>{{ $category->slug }}</span>
                                             </td>
+                                            <td class="px-16 py-2 text-left">
+                                                <i class="{{ $category->icon->body }}"></i>
+                                            </td>
                                             <td class="px-1 py-2 text-center text-gray-600">
                                                 <div class="flex items-center justify-center ">
-                                                    <div class="w-4 mr-2 transform hover:text-green-700 hover:scale-110 cursor-pointer">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                        </svg>
-                                                    </div>
                                                     <div class="w-4 mr-2 transform hover:text-primary hover:scale-110 cursor-pointer">
                                                         <a href="{{ route('categories.edit', $category->slug) }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
