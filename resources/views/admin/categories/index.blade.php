@@ -62,7 +62,7 @@
                                                 <span>{{ $category->slug }}</span>
                                             </td>
                                             <td class="px-16 py-2 text-left">
-                                                <i class="{{ $category->icon->body }}"></i>
+                                                <i class="{{ $category->icon->body ?? '' }}"></i>
                                             </td>
                                             <td class="px-1 py-2 text-center text-gray-600">
                                                 <div class="flex items-center justify-center ">

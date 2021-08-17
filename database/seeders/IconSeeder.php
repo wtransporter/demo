@@ -15,22 +15,22 @@ class IconSeeder extends Seeder
     public function run()
     {
         Icon::create([
-            'body' => 'fas fa-bacon fa-3x'
+            'body' => 'fas fa-bacon'
         ]);
         Icon::create([
-            'body' => 'fas fa-cookie fa-3x'
+            'body' => 'fas fa-cookie'
         ]);
         Icon::create([
-            'body' => 'fas fa-drumstick-bite fa-3x'
+            'body' => 'fas fa-drumstick-bite'
         ]);
         Icon::create([
-            'body' => 'fas fa-hamburger fa-3x'
+            'body' => 'fas fa-hamburger'
         ]);
         Icon::create([
-            'body' => 'fas fa-bread-slice fa-3x'
+            'body' => 'fas fa-bread-slice'
         ]);
         Icon::create([
-            'body' => 'fas fa-birthday-cake fa-3x'
+            'body' => 'fas fa-birthday-cake'
         ]);
     }
 }
