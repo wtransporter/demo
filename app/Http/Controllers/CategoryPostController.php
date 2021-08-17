@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryPostController extends Controller
 {
@@ -15,7 +14,8 @@ class CategoryPostController extends Controller
     public function index(Category $category)
     {
         return view('categories.index', [
-            'posts' => $category->posts()->with('category')->paginate(9)
+            'posts' => $category->posts()->active()->with('category')->paginate(9),
+            'categoryName' => $category->name
         ]);
     }
 }

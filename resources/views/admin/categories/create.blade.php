@@ -5,7 +5,13 @@
         </h2>
     </x-slot>
     <div class="max-w-5xl mx-auto p-4 lg:px-6 w-full text-gray-600 grid grid-cols-4">
-        <div class="p-4 text-gray-600 col-span-3">
+        <div class="col-span-4 px-4">
+            <x-primary-button href="{{ route('categories.index') }}">
+                <i class="fas fa-arrow-left"></i>
+                {{ __('Categories') }}
+            </x-primary-button>
+        </div>
+        <div class="p-4 text-gray-600 col-span-4 md:col-span-3">
             @if (session()->has('message'))
                 <x-alert :message="session('message')" />
             @endif
@@ -56,7 +62,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-span-1 p-4">
+        <div class="col-span-2 md:col-span-1 p-4">
             <label class="block text-center font-semibold" for="slug">{{ __('Icons Preview') }}</label>
             @foreach ($icons as $icon)
                 <div class="flex items-center">

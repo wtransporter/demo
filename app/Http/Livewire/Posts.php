@@ -11,7 +11,6 @@ class Posts extends Component
     use WithPagination;
 
     public $perPage = 9;
-    public $post;
 
     protected $listeners = ['deleted' => 'refreshPage', 'saved' => '$refresh'];
 

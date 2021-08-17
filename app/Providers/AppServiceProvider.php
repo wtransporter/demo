@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.app', 'admin.categories.index', 'livewire.create-post', 'welcome'], function($view) {
             $allCategories = \Cache::rememberForever('categories', function() {
-                return Category::all();
+                return Category::with('icon')->get();
             });
             $view->with('categories', $allCategories);
         });
