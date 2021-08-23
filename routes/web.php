@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\IngredientController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IconController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryPostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\IngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::get('categories/{category:slug}/posts', [CategoryPostController::class, '
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', CategoryController::class);
     Route::resource('posts.ingredients', IngredientController::class)->only(['index', 'update', 'destroy', 'store']);
+    Route::resource('icons', IconController::class)->only(['index', 'update', 'store', 'destroy']);
 });

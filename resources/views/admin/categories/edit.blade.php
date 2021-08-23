@@ -37,7 +37,7 @@
                     <select name="icon_id" id="icon" class="bg-gray-100">
                         <option value="0">Select Icon</option>                       
                         @foreach ($icons as $icon)
-                            <option value="{{ $icon->id }}" {{ $icon->id === $category->icon->id ? 'selected' : '' }}>
+                            <option value="{{ $icon->id }}" {{ $icon->id === $category->icon_id ? 'selected' : '' }}>
                                 {!! $icon->body !!}
                             </option>
                         @endforeach

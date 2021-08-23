@@ -94,13 +94,15 @@ class ManageCategoriesTest extends TestCase
         $this->signIn();
 
         $category = Category::factory()->create(['name' => 'New name']);
+        $icon = Icon::create(['body' => 'fas fa-icon']);
 
         $attributes = [
             'name' => 'Upaded name',
-            'slug' => 'updated-name'
+            'slug' => 'updated-name',
+            'icon_id' => $icon->id
         ];
 
-        $this->patch("categories/$category->slug", $attributes);
+        $this->patch("categories/$category->slug", $attributes); 
 
         $this->assertDatabaseHas('categories', $attributes);
 
