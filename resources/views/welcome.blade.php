@@ -15,14 +15,21 @@
                         <div class="flex-1 flex flex-col">
                             <header>
                                 <h3 class="text-4xl font-semibold text-gray-800">{{ $featuredPosts[0]->title }}</h3>
-                                <span class="text-xs text-gray-600">Published {{ $featuredPosts[0]->created_at->diffForHumans() }}</span>
+                                <div class="flex items-center justify-bottom space-x-2 mt-2">
+                                    <span class="text-gray-600 inline-flex items-center text-xs">
+                                        <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                        {{ $featuredPosts[0]->visits }}
+                                    </span>
+                                    <span class="text-xs text-gray-600">Published {{ $featuredPosts[0]->created_at->diffForHumans() }}</span>
+                                </div>
                             </header>
                             <p class="mt-4 text-gray-600">
                                 {!! $featuredPosts[0]->description !!}
                             </p>
-                            <x-primary-button href="{{ route('posts.show', $featuredPosts[0]->id) }}" icon="angle-right" class="w-32 mt-4">
-                                Read more
-                            </x-primary-button>
+                            @livewire('add-visit', ['post' => $featuredPosts[0]], key($featuredPosts[0]->id))
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 mt-4">

@@ -10,8 +10,8 @@ class SinglePost extends Component
 
     public function show()
     {
-        $this->singlePost->visits++;
-        $this->singlePost->save();
+        $this->singlePost->increment('visits');
+
         return redirect()->route('posts.show', $this->singlePost);
     }
 
